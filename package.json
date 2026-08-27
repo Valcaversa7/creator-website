@@ -1,0 +1,25 @@
+{
+  "name": "siteforge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SiteForge — premium black-and-white one-page site for a freelance web designer. Static, dependency-free, deployable to Vercel.",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && npx --yes serve dist -l 5173",
+    "preview": "npx --yes serve dist -l 5173",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "static-site",
+    "vercel",
+    "freelance",
+    "web-design",
+    "portfolio"
+  ],
+  "author": "Belsso",
+  "license": "UNLICENSED"
+}

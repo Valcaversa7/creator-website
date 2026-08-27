@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="I design and build modern, professional websites for businesses that help you look credible, get found online, and win more customers." />
+  <meta name="theme-color" content="#000000" />
+  <title>SiteForge — Premium Websites for Modern Businesses</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- Custom cursor follower -->
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <div class="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Page-load overlay -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-mark">SITEFORGE</div>
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="#home" class="nav-logo" aria-label="Home">
+        <span class="logo-mark">◼</span>
+        <span class="logo-text">SITEFORGE</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#home" class="nav-link">HOME</a>
+        <a href="#services" class="nav-link">SERVICES</a>
+        <a href="#work" class="nav-link">WORK</a>
+        <a href="#process" class="nav-link">PROCESS</a>
+        <a href="#pricing" class="nav-link">PRICING</a>
+        <a href="#contact" class="nav-link">CONTACT</a>
+      </nav>
+
+      <a href="#contact" class="btn btn-primary nav-cta">GET STARTED</a>
+
+  <!-- Personal contact: name, Indian phone (+91 9176300158), email -->
+  <!-- To change these site-wide, search for "siteforge" or "9176300158" in this file. -->
+
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="container hero-inner">
+        <div class="hero-eyebrow reveal">
+          <span class="eyebrow-dot"></span>
+          <span>FREELANCE WEB DESIGNER</span>
+        </div>
+
+        <h1 class="hero-title">
+          <span class="line"><span class="line-inner">YOUR BUSINESS DESERVES</span></span>
+          <span class="line"><span class="line-inner">A <em>BETTER</em> WEBSITE.</span></span>
+        </h1>
+
+        <p class="hero-sub reveal">
+          I create modern, professional websites that help businesses
+          look credible, stand out online, and get more customers.
+        </p>
+
+        <div class="hero-ctas reveal">
+          <a href="#contact" class="btn btn-primary btn-lg">
+            <span>GET YOUR WEBSITE</span>
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+          <a href="#work" class="btn btn-ghost btn-lg">
+            <span>SEE MY WORK</span>
+          </a>
+        </div>
+
+        <div class="hero-meta reveal">
+          <div class="meta-item">
+            <span class="meta-num">60+</span>
+            <span class="meta-label">Projects shipped</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-num">5★</span>
+            <span class="meta-label">Client rating</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-num">14d</span>
+            <span class="meta-label">Avg. delivery</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Floating preview tile (parallax) -->
+      <div class="hero-float parallax" data-parallax="-40">
+        <div class="float-card">
+          <div class="float-window">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="float-body">
+            <div class="float-line w-80"></div>
+            <div class="float-line w-60"></div>
+            <div class="float-line w-40"></div>
+            <div class="float-grid">
+              <div></div><div></div><div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decorative marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>RESPONSIVE</span><span>·</span>
+          <span>FAST</span><span>·</span>
+          <span>MODERN</span><span>·</span>
+          <span>CREDIBLE</span><span>·</span>
+          <span>SEARCH READY</span><span>·</span>
+          <span>CONVERSION FOCUSED</span><span>·</span>
+          <span>RESPONSIVE</span><span>·</span>
+          <span>FAST</span><span>·</span>
+          <span>MODERN</span><span>·</span>
+          <span>CREDIBLE</span><span>·</span>
+          <span>SEARCH READY</span><span>·</span>
+          <span>CONVERSION FOCUSED</span><span>·</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-tag reveal">(01) SERVICES</span>
+          <h2 class="section-title reveal">WHAT I BUILD</h2>
+          <p class="section-sub reveal">
+            Clean, fast, conversion-focused websites — purpose-built for the way your business actually works.
+          </p>
+        </header>
+
+        <div class="services-grid">
+          <article class="service-card reveal">
+            <span class="card-num">01</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="3" y="4" width="18" height="14" rx="1.5"/>
+                <path d="M3 8h18"/>
+                <path d="M8 21h8"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Business Websites</h3>
+            <p class="card-text">A complete, professional site that tells your story and turns visitors into customers.</p>
+            <span class="card-link">Learn more →</span>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-num">02</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M4 4h16v12H4z"/>
+                <path d="M4 20h16"/>
+                <path d="M8 16v4"/>
+                <path d="M16 16v4"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Landing Pages</h3>
+            <p class="card-text">High-converting single pages built to sell one product, service or offer.</p>
+            <span class="card-link">Learn more →</span>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-num">03</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M5 3v18"/>
+                <path d="M5 5h11a3 3 0 0 1 0 6H5"/>
+                <path d="M5 11h13a3 3 0 0 1 0 6H5"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Restaurant Websites</h3>
+            <p class="card-text">Menus, reservations, location and atmosphere — designed to bring guests through the door.</p>
+            <span class="card-link">Learn more →</span>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-num">04</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="3" y="3" width="8" height="8"/>
+                <rect x="13" y="3" width="8" height="8"/>
+                <rect x="3" y="13" width="8" height="8"/>
+                <rect x="13" y="13" width="8" height="8"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Portfolio Websites</h3>
+            <p class="card-text">A bold showcase of your work that makes a strong first impression on every visitor.</p>
+            <span class="card-link">Learn more →</span>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-num">05</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M3 7h18"/>
+                <path d="M3 12h18"/>
+                <path d="M3 17h12"/>
+                <circle cx="19" cy="17" r="2"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Service Business Websites</h3>
+            <p class="card-text">Built for plumbers, salons, agencies and trades — with quote forms that actually convert.</p>
+            <span class="card-link">Learn more →</span>
+          </article>
+
+          <article class="service-card reveal">
+            <span class="card-num">06</span>
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M12 2l3 6 6 1-4.5 4 1 6L12 16l-5.5 3 1-6L3 9l6-1z"/>
+              </svg>
+            </div>
+            <h3 class="card-title">Custom Websites</h3>
+            <p class="card-text">Have something specific in mind? I'll design and build exactly what your business needs.</p>
+            <span class="card-link">Learn more →</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section section-alt" id="why">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-tag reveal">(02) WHY</span>
+          <h2 class="section-title reveal">WHY YOUR BUSINESS<br/>NEEDS A WEBSITE</h2>
+        </header>
+
+        <div class="why-grid">
+          <div class="why-item reveal">
+            <span class="why-num">01</span>
+            <h3 class="why-title">LOOK PROFESSIONAL</h3>
+            <p class="why-text">Give customers a place to learn about your business and build trust.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-num">02</span>
+            <h3 class="why-title">GET FOUND ONLINE</h3>
+            <p class="why-text">Give your business a professional presence on the web.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-num">03</span>
+            <h3 class="why-title">MOBILE READY</h3>
+            <p class="why-text">Make your business accessible from phones, tablets, and desktops.</p>
+          </div>
+          <div class="why-item reveal">
+            <span class="why-num">04</span>
+            <h3 class="why-title">GET MORE CUSTOMERS</h3>
+            <p class="why-text">Turn website visitors into potential customers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="section" id="work">
+      <div class="container">
+        <!--
+          ============================================================
+          ADD YOUR PROJECTS HERE.
+          Duplicate one <article class="work-card reveal"> ... </article>
+          block for each project. The grid auto-fills and is responsive
+          (2 columns on desktop, 1 on mobile).
+
+          Inside .work-preview, replace the <div class="mock ..."> with
+          an <img> tag once you have screenshots, e.g.:
+            <img src="assets/project-1.jpg" alt="Project name" />
+          ============================================================
+
+        <div class="work-grid">
+
+          <article class="work-card reveal">
+            <div class="work-preview">
+              <img src="assets/project-1.jpg" alt="Project name" />
+            </div>
+            <div class="work-meta">
+              <span class="work-tag">Business Type</span>
+              <h3 class="work-title">Project Name</h3>
+              <p class="work-text">Short description of the project and what you built for the client.</p>
+              <a href="#" class="btn btn-ghost">VIEW PROJECT →</a>
+            </div>
+          </article>
+
+        </div>
+        -->
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section section-dark" id="process">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-tag reveal">(04) PROCESS</span>
+          <h2 class="section-title reveal">HOW IT WORKS</h2>
+          <p class="section-sub reveal">A simple, proven four-step process — from first message to live website.</p>
+        </header>
+
+        <ol class="process-list">
+          <li class="process-step reveal">
+            <div class="step-num">01</div>
+            <div class="step-body">
+              <h3 class="step-title">TELL ME ABOUT YOUR BUSINESS</h3>
+              <p class="step-text">Tell me what your business does and what you need. We clarify goals, audience and must-haves.</p>
+            </div>
+            <div class="step-arrow" aria-hidden="true">→</div>
+          </li>
+          <li class="process-step reveal">
+            <div class="step-num">02</div>
+            <div class="step-body">
+              <h3 class="step-title">I DESIGN IT</h3>
+              <p class="step-text">I create a modern design tailored to your business — refined until it feels unmistakably yours.</p>
+            </div>
+            <div class="step-arrow" aria-hidden="true">→</div>
+          </li>
+          <li class="process-step reveal">
+            <div class="step-num">03</div>
+            <div class="step-body">
+              <h3 class="step-title">I BUILD IT</h3>
+              <p class="step-text">I turn the design into a fast, responsive website — pixel-perfect on every device.</p>
+            </div>
+            <div class="step-arrow" aria-hidden="true">→</div>
+          </li>
+          <li class="process-step reveal">
+            <div class="step-num">04</div>
+            <div class="step-body">
+              <h3 class="step-title">YOU GO LIVE</h3>
+              <p class="step-text">Your new website is ready for customers. Launch, share, and start winning more business online.</p>
+            </div>
+            <div class="step-arrow" aria-hidden="true">↗</div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-tag reveal">(05) PRICING</span>
+          <h2 class="section-title reveal">LET'S TALK</h2>
+          <p class="section-sub reveal">Every business is different. Tell me about yours and I'll send a clear, no-obligation quote — usually within 24 hours.</p>
+        </header>
+
+        <div class="pricing-grid pricing-grid-single">
+          <article class="price-card price-card-featured reveal">
+            <span class="price-badge">CUSTOM · TAILORED TO YOU</span>
+            <header class="price-head">
+              <span class="price-name">CUSTOM</span>
+              <span class="price-desc">For businesses that need a unique or more advanced website. Built from scratch around your goals, brand and budget.</span>
+            </header>
+            <div class="price-amount">
+              <span class="price-value price-value-text" data-price-text>LET'S TALK</span>
+            </div>
+            <ul class="price-features">
+              <li>Fully tailored scope &amp; timeline</li>
+              <li>Custom design system — nothing off-the-shelf</li>
+              <li>Custom features, integrations &amp; automations</li>
+              <li>Advanced animations &amp; interactions</li>
+              <li>E-commerce, booking, payments &amp; more</li>
+              <li>Mobile, tablet &amp; desktop — pixel perfect</li>
+              <li>SEO foundations built in from day one</li>
+              <li>Ongoing support &amp; maintenance available</li>
+              <li>Clear, fixed quote before we start</li>
+            </ul>
+            <a href="#contact" class="btn btn-primary btn-block">REQUEST A QUOTE →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN CTA -->
+    <section class="section cta-section">
+      <div class="container cta-inner reveal">
+        <h2 class="cta-title">READY TO TAKE YOUR<br/>BUSINESS ONLINE?</h2>
+        <p class="cta-sub">Tell me about your business. I'll take care of the rest.</p>
+        <a href="#contact" class="btn btn-invert btn-lg">
+          <span>START YOUR PROJECT</span>
+          <span class="btn-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section section-alt" id="contact">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-tag reveal">(06) CONTACT</span>
+          <h2 class="section-title reveal">LET'S BUILD SOMETHING</h2>
+          <p class="section-sub reveal">Fill out the form or message me directly. I usually reply within a few hours.</p>
+        </header>
+
+        <div class="contact-grid">
+          <form class="contact-form reveal" id="contactForm" novalidate>
+            <div class="field-row">
+              <div class="field">
+                <label for="name">NAME</label>
+                <input type="text" id="name" name="name" required placeholder="Your full name" autocomplete="name" />
+              </div>
+              <div class="field">
+                <label for="business">BUSINESS NAME</label>
+                <input type="text" id="business" name="business" required placeholder="Your business" autocomplete="organization" />
+              </div>
+            </div>
+
+            <div class="field-row">
+              <div class="field">
+                <label for="email">EMAIL</label>
+                <input type="email" id="email" name="email" required placeholder="you@business.com" autocomplete="email" />
+              </div>
+              <div class="field">
+                <label for="phone">PHONE</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 9176300158" autocomplete="tel" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="website">WEBSITE <span class="optional">(optional)</span></label>
+              <input type="url" id="website" name="website" placeholder="https://" autocomplete="url" />
+            </div>
+
+            <div class="field">
+              <label for="business_do">WHAT DOES YOUR BUSINESS DO?</label>
+              <input type="text" id="business_do" name="business_do" required placeholder="e.g. I'm a plumber in Austin, Texas" />
+            </div>
+
+            <div class="field">
+              <label for="site_type">WHAT KIND OF WEBSITE DO YOU NEED?</label>
+              <select id="site_type" name="site_type" required>
+                <option value="" disabled selected>Choose a type</option>
+                <option>Business website</option>
+                <option>Landing page</option>
+                <option>Restaurant website</option>
+                <option>Portfolio website</option>
+                <option>Service business website</option>
+                <option>E-commerce</option>
+                <option>Custom project</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="message">MESSAGE</label>
+              <textarea id="message" name="message" rows="5" required placeholder="Tell me a bit about what you need, your timeline, and any examples you like."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">
+              <span id="submitText">SEND REQUEST</span>
+              <span class="btn-arrow" aria-hidden="true">→</span>
+            </button>
+
+            <p class="form-note" id="formNote" aria-live="polite"></p>
+          </form>
+
+          <aside class="contact-side reveal">
+            <div class="side-card">
+              <span class="side-label">YOUR NAME</span>
+              <span class="side-value">Belsso</span>
+            </div>
+            <div class="side-card">
+              <span class="side-label">EMAIL</span>
+              <a class="side-value" href="mailto:belssobelsso81@gmail.com" data-contact="email">belssobelsso81@gmail.com</a>
+            </div>
+            <div class="side-card">
+              <span class="side-label">WHATSAPP / PHONE</span>
+              <a class="side-value" href="https://wa.me/919176300158" data-contact="whatsapp" target="_blank" rel="noopener">+91 9176300158</a>
+            </div>
+            <div class="side-card">
+              <span class="side-label">LOCATION</span>
+              <span class="side-value">India · Working worldwide</span>
+            </div>
+            <div class="side-card">
+              <span class="side-label">AVAILABILITY</span>
+              <span class="side-value availability">
+                <span class="avail-dot"></span> Currently accepting new projects
+              </span>
+            </div>
+
+            <div class="quick-contact">
+              <span class="side-label">QUICK CONTACT</span>
+              <div class="quick-buttons">
+                <a href="https://wa.me/919176300158" target="_blank" rel="noopener" class="btn btn-ghost btn-block">MESSAGE ON WHATSAPP</a>
+                <a href="mailto:belssobelsso81@gmail.com" class="btn btn-ghost btn-block">SEND AN EMAIL</a>
+              </div>
+              <p class="quick-note">Prefer a call? Tap WhatsApp to message <strong>+91 9176300158</strong>.</p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-mark">◼</span>
+        <span class="logo-text">SITEFORGE</span>
+        <p>Premium websites for modern businesses. Designed and built with care by Belsso.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div>
+          <span class="footer-label">SITEMAP</span>
+          <a href="#home">Home</a>
+          <a href="#services">Services</a>
+          <a href="#work">Work</a>
+          <a href="#process">Process</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div>
+          <span class="footer-label">CONTACT</span>
+          <a href="mailto:belssobelsso81@gmail.com">belssobelsso81@gmail.com</a>
+          <a href="https://wa.me/919176300158" target="_blank" rel="noopener">WhatsApp · +91 9176300158</a>
+        </div>
+        <div>
+          <span class="footer-label">SOCIAL</span>
+          <a href="#" target="_blank" rel="noopener">Instagram</a>
+          <a href="#" target="_blank" rel="noopener">X / Twitter</a>
+          <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <span>© <span id="year"></span> SiteForge. All rights reserved.</span>
+      <span>Crafted in black &amp; white.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
