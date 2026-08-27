@@ -1,14 +1,9 @@
-# Source folder — Vercel doesn't need it
-site/
-
-# Build input
-build.js
-public/
+# Build output — regenerated on Vercel by build.js
+dist/
 
 # Local tooling
 .git/
 .gitignore
-.vercelignore
 
 # Editor / OS
 .DS_Store
@@ -23,15 +18,14 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Environment
+# Environment / secrets
 .env
 .env.local
 .env.*.local
 
-# Node
+# Dependencies (project has none, but just in case)
 node_modules/
 .npm
 
-# Other
+# Docs
 README.md
-package-lock.json
