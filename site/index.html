@@ -19,6 +19,13 @@
   <!-- Film grain overlay -->
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- Jelly cursor: colourful blob + colour-reveal echoes -->
+  <div class="jelly-wrap" id="jellyWrap" aria-hidden="true">
+    <div class="jelly" id="jelly"><div class="jelly-inner"></div></div>
+    <div class="jelly-echo"></div>
+    <div class="jelly-echo"></div>
+  </div>
+
   <!-- Page-load preloader -->
   <div class="loader" id="loader" aria-hidden="true">
     <div class="loader-brand">SITEFORGE</div>
@@ -80,15 +87,15 @@
         <!-- Floating project cards -->
         <div class="hero-stack" aria-hidden="false">
           <button type="button" class="float-card parallax" data-depth="26" data-project="nova" aria-haspopup="dialog">
-            <span class="float-media"><img src="assets/work-1.jpg" alt="Nova Architecture — website project" /></span>
+            <span class="float-media color-reveal"><img src="assets/work-1.jpg" alt="Nova Architecture — website project" /><img class="color-layer" src="assets/work-1.jpg" alt="" aria-hidden="true" /></span>
             <span class="float-meta"><span class="float-num">01</span><span class="float-name">Nova Architecture</span></span>
           </button>
           <button type="button" class="float-card parallax" data-depth="44" data-project="form" aria-haspopup="dialog">
-            <span class="float-media"><img src="assets/work-2.jpg" alt="Form Furniture — e-commerce project" /></span>
+            <span class="float-media color-reveal"><img src="assets/work-2.jpg" alt="Form Furniture — e-commerce project" /><img class="color-layer" src="assets/work-2.jpg" alt="" aria-hidden="true" /></span>
             <span class="float-meta"><span class="float-num">02</span><span class="float-name">Form Furniture</span></span>
           </button>
           <button type="button" class="float-card parallax" data-depth="16" data-project="saffron" aria-haspopup="dialog">
-            <span class="float-media"><img src="assets/work-3.jpg" alt="Saffron &amp; Salt — restaurant website project" /></span>
+            <span class="float-media color-reveal"><img src="assets/work-3.jpg" alt="Saffron &amp; Salt — restaurant website project" /><img class="color-layer" src="assets/work-3.jpg" alt="" aria-hidden="true" /></span>
             <span class="float-meta"><span class="float-num">03</span><span class="float-name">Saffron &amp; Salt</span></span>
           </button>
         </div>
@@ -146,7 +153,7 @@
         </header>
 
         <figure class="work-piece reveal">
-          <div class="work-frame"><img src="assets/work-1.jpg" alt="Nova Architecture website — monochrome architectural photography" loading="lazy" /></div>
+          <div class="work-frame color-reveal"><img src="assets/work-1.jpg" alt="Nova Architecture website — monochrome architectural photography" loading="lazy" /><img class="color-layer" src="assets/work-1.jpg" alt="" aria-hidden="true" loading="lazy" /></div>
           <figcaption class="work-caption">
             <span class="cap-num">01</span>
             <span class="cap-title">Nova Architecture</span>
@@ -156,7 +163,7 @@
         </figure>
 
         <figure class="work-piece reveal">
-          <div class="work-frame"><img src="assets/work-2.jpg" alt="Form Furniture store — monochrome product photography" loading="lazy" /></div>
+          <div class="work-frame color-reveal"><img src="assets/work-2.jpg" alt="Form Furniture store — monochrome product photography" loading="lazy" /><img class="color-layer" src="assets/work-2.jpg" alt="" aria-hidden="true" loading="lazy" /></div>
           <figcaption class="work-caption">
             <span class="cap-num">02</span>
             <span class="cap-title">Form Furniture</span>
@@ -166,7 +173,7 @@
         </figure>
 
         <figure class="work-piece reveal">
-          <div class="work-frame"><img src="assets/work-3.jpg" alt="Saffron and Salt restaurant website — monochrome food photography" loading="lazy" /></div>
+          <div class="work-frame color-reveal"><img src="assets/work-3.jpg" alt="Saffron and Salt restaurant website — monochrome food photography" loading="lazy" /><img class="color-layer" src="assets/work-3.jpg" alt="" aria-hidden="true" loading="lazy" /></div>
           <figcaption class="work-caption">
             <span class="cap-num">03</span>
             <span class="cap-title">Saffron &amp; Salt</span>
