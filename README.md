@@ -108,9 +108,8 @@ All personal/contact info is in `site/index.html`. To change site-wide values, s
 
 | What                          | Search for                  |
 |-------------------------------|-----------------------------|
-| Your personal name            | `Belsso`                    |
-| WhatsApp / phone number       | `9176300158`                |
-| Email                         | `belssobelsso81@gmail.com`  |
+| Email (placeholder for now)   | `email@example.com`         |
+| Phone (placeholder for now)   | `XXXXX`                     |
 | Brand / studio name           | `SITEFORGE`                 |
 
 To add a project screenshot, drop the file into `site/assets/` and replace a
