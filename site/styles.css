@@ -73,6 +73,11 @@ button { font-family: inherit; }
   clip-path: inset(0 0 0 0);
 }
 .loader.is-done { clip-path: inset(0 0 100% 0); pointer-events: none; }
+/* Safety net: if JS ever fails, the loader fades itself out after 6s */
+.loader { animation: loaderFallback 0.8s var(--ease) 6s forwards; }
+@keyframes loaderFallback {
+  to { opacity: 0; visibility: hidden; }
+}
 .loader-brand {
   font-size: 12px;
   letter-spacing: 0.22em;
