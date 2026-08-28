@@ -135,20 +135,20 @@
     nova: {
       num: '01',
       title: 'Nova Architecture',
-      type: 'Business website · Studio practice · 2026',
-      text: 'A monochrome portfolio for an architecture studio — full-bleed project imagery, case-study layouts and a enquiry flow that filters serious leads. Fast, quiet, and built to let the work speak.'
+      type: 'Architecture — Website Concept',
+      text: 'A SiteForge concept exploring how an architecture studio could present itself online — full-bleed monochrome project imagery, case-study layouts and a calm, confident enquiry flow. Designed to show the level of website your studio could have.'
     },
     form: {
       num: '02',
       title: 'Form Furniture',
-      type: 'E-commerce · Product catalogue · 2025',
-      text: 'An online store for a furniture maker — editorial product pages, a lightning-fast catalogue and a checkout path with almost no friction. Designed to feel like flipping through a lookbook.'
+      type: 'Furniture — Website Concept',
+      text: 'A SiteForge concept for a furniture maker\u2019s online store — editorial product pages, a lightning-fast catalogue and a nearly frictionless checkout path, composed to feel like flipping through a printed lookbook. Yours could work the same way.'
     },
     saffron: {
       num: '03',
       title: 'Saffron & Salt',
-      type: 'Restaurant website · Reservations · 2025',
-      text: 'A restaurant site that makes you hungry — moody photography, a menu that updates in minutes, reservations linked up and directions one tap away. Built to turn browsing into bookings.'
+      type: 'Restaurant — Website Concept',
+      text: 'A SiteForge concept for a restaurant that wants photography to do the selling — moody imagery, a menu that updates in minutes, reservations linked up and directions one tap away. Imagine it dressed in your brand instead.'
     }
   };
 
