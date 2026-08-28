@@ -254,11 +254,15 @@
     });
   });
 
-  /* ---------- Magnetic buttons (subtle) ---------- */
+  /* ---------- Magnetic buttons + cursor-tracked glow ---------- */
   $$('.btn').forEach(btn => {
-    if (isCoarse || reduceMotion) return;
     btn.addEventListener('mousemove', (e) => {
       const r = btn.getBoundingClientRect();
+      // spotlight position (works for everyone, incl. reduced-motion)
+      btn.style.setProperty('--mx', (e.clientX - r.left).toFixed(1) + 'px');
+      btn.style.setProperty('--my', (e.clientY - r.top).toFixed(1) + 'px');
+      if (isCoarse || reduceMotion) return;
+      // magnetic pull (skipped on touch / reduced motion)
       const x = e.clientX - r.left - r.width / 2;
       const y = e.clientY - r.top - r.height / 2;
       btn.style.transform = 'translate(' + (x * 0.1).toFixed(2) + 'px, ' + (y * 0.16).toFixed(2) + 'px)';

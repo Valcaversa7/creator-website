@@ -1043,3 +1043,31 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
   .hero-lines { animation: none; }
   .line-pulse, .line-pulse-glow { animation: none; opacity: 0; }
 }
+
+/* ---------- Cursor-tracked glow on buttons ---------- */
+.btn {
+  position: relative;
+  isolation: isolate;
+  --btn-glow: 255, 205, 150; /* warm tungsten light */
+}
+/* Halo + surface wash: one radial layer centred on the cursor.
+   Extends past the pill so light bleeds around the edges; sits below
+   the label but above the background. */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: -24px;
+  border-radius: 999px;
+  background: radial-gradient(
+    115px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(var(--btn-glow), 0.6),
+    rgba(var(--btn-glow), 0.22) 45%,
+    transparent 74%
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+  pointer-events: none;
+  z-index: -1;
+}
+.btn:hover::before,
+.btn:focus-visible::before { opacity: 1; }
