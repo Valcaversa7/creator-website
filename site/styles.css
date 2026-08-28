@@ -301,7 +301,10 @@ button { font-family: inherit; }
   margin-bottom: 26px;
 }
 .hero-title {
-  font-size: clamp(64px, 11vw, 176px);
+  /* Cap sized so "DESIGNER." always fits the left hero column at any
+     viewport — a larger cap gets clipped by the reveal animation's
+     overflow:hidden (the "invisible R" bug). */
+  font-size: clamp(54px, 9vw, 132px);
   font-weight: 800;
   line-height: 0.92;
   letter-spacing: -0.035em;
