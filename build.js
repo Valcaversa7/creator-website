@@ -184,6 +184,10 @@ function build() {
     if (/^https?:\/\//i.test(url) || url.startsWith('//') || url.startsWith('data:')) {
       return full;
     }
+    // Skip absolute paths (e.g., /_vercel/insights/script.js)
+    if (url.startsWith('/')) {
+      return full;
+    }
     // only rewrite local CSS/JS references
     if (!/\.(css|js)(\?|$)/i.test(url)) return full;
     const base = path.basename(url).split('?')[0];
@@ -203,10 +207,11 @@ function build() {
   // occurrences of `styles.css` and `script.js` inside the (new) files
   // in case any text references slipped through. Our files don't, but
   // it's defensive.
-  for (const { from, to } of replacements) {
-    const re = new RegExp(from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-    html = html.replace(re, to);
-  }
+  // NOTE: Disabled to avoid affecting absolute paths like /_vercel/insights/script.js
+  // for (const { from, to } of replacements) {
+  //   const re = new RegExp(from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+  //   html = html.replace(re, to);
+  // }
 
   // ------------------------------------------------------------------
   // Minify assets
