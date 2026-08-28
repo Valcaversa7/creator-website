@@ -185,6 +185,25 @@
     });
   });
 
+  /* ---------- Service card "Learn more" expand/collapse ---------- */
+  const setCard = (card, open) => {
+    card.classList.toggle('open', open);
+    const btn = $('.card-toggle', card);
+    const label = btn ? $('.card-toggle-label', btn) : null;
+    if (btn) btn.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? 'Close' : 'Learn more';
+  };
+  $$('.card-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.service-card');
+      if (!card) return;
+      const wasOpen = card.classList.contains('open');
+      // close any other open card so only one expands at a time
+      $$('.service-card.open').forEach(other => { if (other !== card) setCard(other, false); });
+      setCard(card, !wasOpen);
+    });
+  });
+
   /* ---------- Magnetic buttons (subtle) ---------- */
   $$('.btn').forEach(btn => {
     if (isCoarse) return;

@@ -654,6 +654,74 @@ em { font-family: var(--font-serif); font-style: italic; font-weight: 400; lette
 }
 .service-card:hover .card-link { transform: translateX(4px); }
 
+/* "Learn more" toggle (button reset) */
+.card-toggle {
+  background: none;
+  border: 0;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+}
+.card-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.card-toggle-arrow {
+  display: inline-block;
+  margin-left: 8px;
+  transition: transform 0.35s var(--ease);
+}
+.service-card.open .card-toggle .card-toggle-arrow { transform: rotate(90deg); }
+
+/* Expandable service details */
+.card-more {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(8px);
+  transition: max-height 0.5s var(--ease), opacity 0.35s var(--ease),
+              transform 0.45s var(--ease), margin 0.4s var(--ease);
+}
+.service-card.open .card-more {
+  max-height: 360px;
+  opacity: 1;
+  transform: none;
+  margin-top: 22px;
+}
+.card-more li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: #444;
+  transition: color 0.4s var(--ease);
+}
+.card-more li + li { margin-top: 10px; }
+.card-more li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-weight: 600;
+  color: #000;
+  transition: color 0.4s var(--ease);
+}
+.service-card.open .card-more li,
+.service-card:hover .card-more li { color: rgba(255,255,255,0.78); }
+.service-card.open .card-more li::before,
+.service-card:hover .card-more li::before { color: #fff; }
+
+/* Keep the card in its "black" state while expanded */
+.service-card.open::before { transform: translateY(0); }
+.service-card.open { color: #fff; }
+.service-card.open .card-num,
+.service-card.open .card-title { color: #fff; }
+.service-card.open .card-text { color: rgba(255,255,255,0.75); }
+.service-card.open .card-link { color: #fff; }
+.service-card.open .card-icon svg { stroke: #fff; }
+
 /* =========== Why =========== */
 .why-grid {
   display: grid;
