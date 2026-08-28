@@ -1,54 +1,83 @@
-/* =================================================================
-   STUDIO — Interactions
-   ================================================================= */
-
+/**
+ * SiteForge — interactions
+ * Preloader with % counter, hero parallax, project overlay,
+ * click-to-copy email, service toggles, reveals, mobile nav, form.
+ */
 (() => {
   'use strict';
 
   const $  = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- Page loader ---------- */
-  window.addEventListener('load', () => {
-    const loader = $('#loader');
-    if (!loader) return;
-    // minimum visible time so the animation feels intentional
-    setTimeout(() => loader.classList.add('is-done'), 650);
-  });
+  /* ---------- Preloader with percentage ---------- */
+  const loader = $('#loader');
+  const loaderCount = $('#loaderCount');
+  let progress = 0;
+  let progressTimer = null;
+  let loaderDone = false;
 
-  /* ---------- Year ---------- */
-  const yearEl = $('#year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  /* ---------- Nav: scroll state + mobile toggle ---------- */
-  const nav = $('#nav');
-  const navToggle = $('#navToggle');
-  const navLinks = $('#navLinks');
-
-  const onScroll = () => {
-    if (!nav) return;
-    nav.classList.toggle('is-scrolled', window.scrollY > 24);
+  const finishLoader = () => {
+    if (loaderDone) return;
+    loaderDone = true;
+    if (progressTimer) clearInterval(progressTimer);
+    const snap = () => {
+      if (loaderCount) loaderCount.textContent = '100%';
+      loader.classList.add('is-done');
+      document.body.classList.add('loaded');
+      setTimeout(() => { loader.style.display = 'none'; }, 1000);
+    };
+    // brief hold at 100% so the number is readable
+    setTimeout(snap, reduceMotion ? 0 : 250);
   };
+
+  if (loader && loaderCount) {
+    progressTimer = setInterval(() => {
+      // ease toward 90% while assets load, hold there if needed
+      const target = document.readyState === 'complete' ? 100 : 90;
+      progress = Math.min(target, progress + Math.max(1, Math.round((target - progress) * 0.18)));
+      loaderCount.textContent = progress + '%';
+      if (progress >= 100) finishLoader();
+    }, reduceMotion ? 20 : 40);
+    window.addEventListener('load', () => {
+      // let the counter reach 100 on the next tick(s)
+      setTimeout(() => { if (!loaderDone) { progress = 99; } }, 350);
+      setTimeout(finishLoader, 900);
+    });
+    // absolute fallback so nobody ever stares at the loader
+    setTimeout(finishLoader, 4000);
+  } else {
+    document.body.classList.add('loaded');
+  }
+
+  /* ---------- Nav: scrolled state ---------- */
+  const nav = $('#nav');
+  const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 24);
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  if (navToggle && navLinks) {
+  /* ---------- Mobile menu ---------- */
+  const navToggle = $('#navToggle');
+  if (navToggle) {
     navToggle.addEventListener('click', () => {
-      const isOpen = navLinks.classList.toggle('is-open');
-      navToggle.setAttribute('aria-expanded', String(isOpen));
-      document.body.style.overflow = isOpen ? 'hidden' : '';
+      const open = nav.classList.toggle('menu-open');
+      navToggle.classList.toggle('is-open', open);
+      navToggle.setAttribute('aria-expanded', String(open));
+      navToggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      document.body.classList.toggle('no-scroll', open);
     });
-    // Close mobile menu when a link is clicked
-    $$('a', navLinks).forEach(link => {
+    $$('.nav-link').forEach(link =>
       link.addEventListener('click', () => {
-        navLinks.classList.remove('is-open');
+        nav.classList.remove('menu-open');
+        navToggle.classList.remove('is-open');
         navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-      });
-    });
+        document.body.classList.remove('no-scroll');
+      })
+    );
   }
 
-  /* ---------- Smooth anchor scrolling (offset for sticky nav) ---------- */
+  /* ---------- Smooth anchor scroll with nav offset ---------- */
   $$('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
       const href = a.getAttribute('href');
@@ -57,131 +86,143 @@
       if (!target) return;
       e.preventDefault();
       const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h'), 10) || 72;
-      const top = target.getBoundingClientRect().top + window.scrollY - navH + 1;
-      window.scrollTo({ top, behavior: 'smooth' });
+      const top = target.getBoundingClientRect().top + window.scrollY - navH * 0.5;
+      window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
     });
   });
 
-  /* ---------- Active section highlighting in nav ---------- */
-  const sections = $$('main section[id]');
-  const navItems = $$('.nav-link');
-  if ('IntersectionObserver' in window && sections.length) {
-    const navObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const id = entry.target.id;
-          navItems.forEach(n => n.classList.toggle('is-active', n.getAttribute('href') === '#' + id));
-        }
-      });
-    }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
-    sections.forEach(s => navObserver.observe(s));
-  }
-
   /* ---------- Reveal on scroll ---------- */
   const revealEls = $$('.reveal');
-  if ('IntersectionObserver' in window) {
-    const revealObserver = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry, i) => {
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          // small stagger for groups
-          const el = entry.target;
-          const delay = (el.dataset.delay || 0);
-          setTimeout(() => el.classList.add('is-visible'), delay);
-          obs.unobserve(el);
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
-
-    // group siblings inside a parent for staggered reveal
-    const grouped = new Set();
-    revealEls.forEach((el, idx) => {
-      const parent = el.parentElement;
-      if (parent && !grouped.has(parent)) {
-        grouped.add(parent);
-        const kids = Array.from(parent.querySelectorAll(':scope > .reveal'));
-        kids.forEach((kid, i) => {
-          if (!kid.dataset.delay) kid.dataset.delay = String(i * 80);
-        });
-      }
-      revealObserver.observe(el);
-    });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => io.observe(el));
   } else {
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
-  /* ---------- Subtle parallax (data-parallax in px) ---------- */
-  const parallaxEls = $$('[data-parallax]');
-  let ticking = false;
-  const updateParallax = () => {
-    parallaxEls.forEach(el => {
-      const speed = parseFloat(el.dataset.parallax) || 0;
-      const rect = el.getBoundingClientRect();
-      const inView = rect.bottom > -200 && rect.top < window.innerHeight + 200;
-      if (inView) {
-        const offset = (window.innerHeight / 2 - (rect.top + rect.height / 2)) / window.innerHeight * speed;
-        el.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0)`;
-      }
-    });
-    ticking = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateParallax);
-      ticking = true;
-    }
-  }, { passive: true });
-  updateParallax();
-
-  /* ---------- Custom cursor (desktop) ---------- */
-  const cursorDot = $('.cursor-dot');
-  const cursorRing = $('.cursor-ring');
-  const isCoarse = window.matchMedia('(pointer: coarse)').matches;
-  if (cursorDot && cursorRing && !isCoarse) {
-    let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-    let rx = mx, ry = my;
-    const move = (e) => { mx = e.clientX; my = e.clientY; };
-    window.addEventListener('mousemove', move);
-
-    const render = () => {
-      rx += (mx - rx) * 0.18;
-      ry += (my - ry) * 0.18;
-      cursorDot.style.transform = `translate3d(${mx - 3}px, ${my - 3}px, 0)`;
-      cursorRing.style.transform = `translate3d(${rx - 19}px, ${ry - 19}px, 0)`;
-      requestAnimationFrame(render);
+  /* ---------- Hero floating-card parallax ---------- */
+  const parallaxEls = $$('.parallax');
+  if (parallaxEls.length && !isCoarse && !reduceMotion) {
+    let mx = 0, my = 0, cx = 0, cy = 0, raf = null;
+    const tick = () => {
+      cx += (mx - cx) * 0.06;
+      cy += (my - cy) * 0.06;
+      parallaxEls.forEach(el => {
+        const depth = parseFloat(el.dataset.depth || '20');
+        const base = el.style.getPropertyValue('--rot') || '0deg';
+        el.style.transform =
+          'translate3d(' + (cx * depth).toFixed(2) + 'px, ' + (cy * depth).toFixed(2) + 'px, 0) rotate(' + base + ')';
+      });
+      raf = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(render);
+    window.addEventListener('mousemove', (e) => {
+      mx = (e.clientX / window.innerWidth - 0.5) * 2;
+      my = (e.clientY / window.innerHeight - 0.5) * 2;
+    }, { passive: true });
+    raf = requestAnimationFrame(tick);
+  }
 
-    // hover state for interactive elements
-    const interactiveSel = 'a, button, input, select, textarea, .service-card, .price-card, .work-card, [data-cursor]';
-    $$(interactiveSel).forEach(el => {
-      el.addEventListener('mouseenter', () => cursorRing.classList.add('is-hover'));
-      el.addEventListener('mouseleave', () => cursorRing.classList.remove('is-hover'));
-    });
+  /* ---------- Project overlay ---------- */
+  const PROJECTS = {
+    nova: {
+      num: '01',
+      title: 'Nova Architecture',
+      type: 'Business website · Studio practice · 2026',
+      text: 'A monochrome portfolio for an architecture studio — full-bleed project imagery, case-study layouts and a enquiry flow that filters serious leads. Fast, quiet, and built to let the work speak.'
+    },
+    form: {
+      num: '02',
+      title: 'Form Furniture',
+      type: 'E-commerce · Product catalogue · 2025',
+      text: 'An online store for a furniture maker — editorial product pages, a lightning-fast catalogue and a checkout path with almost no friction. Designed to feel like flipping through a lookbook.'
+    },
+    saffron: {
+      num: '03',
+      title: 'Saffron & Salt',
+      type: 'Restaurant website · Reservations · 2025',
+      text: 'A restaurant site that makes you hungry — moody photography, a menu that updates in minutes, reservations linked up and directions one tap away. Built to turn browsing into bookings.'
+    }
+  };
 
-    // hide when leaving window
-    document.addEventListener('mouseleave', () => {
-      cursorDot.style.opacity = '0';
-      cursorRing.style.opacity = '0';
-    });
-    document.addEventListener('mouseenter', () => {
-      cursorDot.style.opacity = '1';
-      cursorRing.style.opacity = '1';
+  const overlay = $('#projectOverlay');
+  const openProject = (key) => {
+    const p = PROJECTS[key];
+    if (!p || !overlay) return;
+    $('#ovNum').textContent = p.num;
+    $('#ovTitle').textContent = p.title;
+    $('#ovType').textContent = p.type;
+    $('#ovText').textContent = p.text;
+    overlay.hidden = false;
+    document.body.classList.add('no-scroll');
+    requestAnimationFrame(() => overlay.classList.add('is-open'));
+    $$('.index-item').forEach(btn => btn.classList.toggle('is-active', btn.dataset.project === key));
+  };
+  const closeOverlay = () => {
+    if (!overlay || overlay.hidden) return;
+    overlay.classList.remove('is-open');
+    document.body.classList.remove('no-scroll');
+    $$('.index-item').forEach(btn => btn.classList.remove('is-active'));
+    setTimeout(() => { overlay.hidden = true; }, 350);
+  };
+  $$('[data-project]').forEach(el => {
+    el.addEventListener('click', () => openProject(el.dataset.project));
+  });
+  if (overlay) {
+    $$('[data-close-overlay]', overlay).forEach(el => el.addEventListener('click', closeOverlay));
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeOverlay(); });
+  }
+
+  /* ---------- Click-to-copy email ---------- */
+  const copyBtn = $('#copyEmail');
+  const copyNote = $('#copyNote');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', async () => {
+      const email = copyBtn.dataset.email || 'email@example.com';
+      let ok = false;
+      try {
+        await navigator.clipboard.writeText(email);
+        ok = true;
+      } catch (err) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = email;
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.select();
+          ok = document.execCommand('copy');
+          document.body.removeChild(ta);
+        } catch (err2) { ok = false; }
+      }
+      if (copyNote) {
+        copyNote.textContent = ok ? 'Email copied!' : 'Copy failed — select it manually';
+        setTimeout(() => { copyNote.textContent = ''; }, 2200);
+      }
     });
   }
 
-  /* ---------- Subtle 3D tilt on work cards ---------- */
-  $$('.work-card').forEach(card => {
-    const preview = $('.work-preview', card);
-    if (!preview) return;
-    card.addEventListener('mousemove', (e) => {
-      if (isCoarse) return;
-      const r = card.getBoundingClientRect();
-      const x = (e.clientX - r.left) / r.width - 0.5;
-      const y = (e.clientY - r.top) / r.height - 0.5;
-      preview.style.transform = `translateY(-6px) perspective(900px) rotateX(${(-y * 3).toFixed(2)}deg) rotateY(${(x * 3).toFixed(2)}deg)`;
-    });
-    card.addEventListener('mouseleave', () => {
-      preview.style.transform = '';
+  /* ---------- Service card "Learn more" expand/collapse ---------- */
+  const setCard = (card, open) => {
+    card.classList.toggle('open', open);
+    const btn = $('.card-toggle', card);
+    const label = btn ? $('.card-toggle-label', btn) : null;
+    if (btn) btn.setAttribute('aria-expanded', String(open));
+    if (label) label.textContent = open ? 'Close' : 'Learn more';
+  };
+  $$('.card-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.service-card');
+      if (!card) return;
+      const wasOpen = card.classList.contains('open');
+      $$('.service-card.open').forEach(other => { if (other !== card) setCard(other, false); });
+      setCard(card, !wasOpen);
     });
   });
 
@@ -206,16 +247,14 @@
 
   /* ---------- Magnetic buttons (subtle) ---------- */
   $$('.btn').forEach(btn => {
-    if (isCoarse) return;
+    if (isCoarse || reduceMotion) return;
     btn.addEventListener('mousemove', (e) => {
       const r = btn.getBoundingClientRect();
       const x = e.clientX - r.left - r.width / 2;
       const y = e.clientY - r.top - r.height / 2;
-      btn.style.transform = `translate(${x * 0.12}px, ${y * 0.18}px)`;
+      btn.style.transform = 'translate(' + (x * 0.1).toFixed(2) + 'px, ' + (y * 0.16).toFixed(2) + 'px)';
     });
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
   });
 
   /* ---------- Contact form (client-side handling only) ---------- */
@@ -225,17 +264,15 @@
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      // simple required validation
-      const required = $$('[required]', form);
+      const required = $$('input[required], select[required], textarea[required]', form);
       let firstInvalid = null;
       required.forEach(input => {
-        const ok = input.value.trim().length > 0 && (input.type !== 'email' || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim()));
-        input.classList.toggle('is-error', !ok);
-        if (!ok && !firstInvalid) firstInvalid = input;
+        const bad = !input.value.trim() ||
+          (input.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value));
+        input.classList.toggle('is-error', bad);
+        if (bad && !firstInvalid) firstInvalid = input;
       });
       if (firstInvalid) {
-        note.textContent = 'Please fill in the highlighted fields.';
-        note.classList.remove('success');
         firstInvalid.focus();
         return;
       }
@@ -243,16 +280,18 @@
       const data = Object.fromEntries(new FormData(form).entries());
       console.log('Contact form submission:', data);
       submitText.textContent = 'SENT ✓';
-      note.textContent = 'Thanks — I\'ll be in touch within a few hours.';
+      note.textContent = "Thanks — I'll be in touch within a few hours.";
       note.classList.add('success');
       form.reset();
       setTimeout(() => { submitText.textContent = 'SEND REQUEST'; }, 4000);
     });
 
-    // clear error on input
     $$('input, select, textarea', form).forEach(input => {
       input.addEventListener('input', () => input.classList.remove('is-error'));
     });
   }
 
+  /* ---------- Footer year ---------- */
+  const year = $('#year');
+  if (year) year.textContent = String(new Date().getFullYear());
 })();
