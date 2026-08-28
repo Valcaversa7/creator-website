@@ -108,26 +108,53 @@
     revealEls.forEach(el => el.classList.add('is-visible'));
   }
 
-  /* ---------- Hero floating-card parallax ---------- */
+  /* ---------- Hero floating-card parallax (perf-tuned) ---------- */
   const parallaxEls = $$('.parallax');
   if (parallaxEls.length && !isCoarse && !reduceMotion) {
+    // cache depth & tilt once — no per-frame DOM/style reads
+    const items = parallaxEls.map(el => ({
+      el,
+      depth: parseFloat(el.dataset.depth || '20'),
+      rot: (getComputedStyle(el).getPropertyValue('--rot') || '0deg').trim() || '0deg'
+    }));
+    const hero = $('.hero');
+    let heroVisible = true;
     let mx = 0, my = 0, cx = 0, cy = 0, raf = null;
+
+    const paint = () => {
+      for (const it of items) {
+        it.el.style.transform =
+          'translate3d(' + (cx * it.depth).toFixed(2) + 'px, ' + (cy * it.depth).toFixed(2) + 'px, 0) rotate(' + it.rot + ')';
+      }
+    };
     const tick = () => {
+      raf = null;
+      if (!heroVisible) return;
       cx += (mx - cx) * 0.06;
       cy += (my - cy) * 0.06;
-      parallaxEls.forEach(el => {
-        const depth = parseFloat(el.dataset.depth || '20');
-        const base = el.style.getPropertyValue('--rot') || '0deg';
-        el.style.transform =
-          'translate3d(' + (cx * depth).toFixed(2) + 'px, ' + (cy * depth).toFixed(2) + 'px, 0) rotate(' + base + ')';
-      });
+      paint();
+      if (Math.abs(mx - cx) < 0.0004 && Math.abs(my - cy) < 0.0004) {
+        cx = mx; cy = my;
+        paint(); // snap exactly to rest, then stop looping — zero cost while idle
+        return;
+      }
       raf = requestAnimationFrame(tick);
     };
+    const kick = () => {
+      if (raf === null && heroVisible) raf = requestAnimationFrame(tick);
+    };
+    if (hero && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        heroVisible = entries[0].isIntersecting;
+        if (heroVisible) kick(); // resume when the hero scrolls back into view
+      }, { threshold: 0 }).observe(hero);
+    }
     window.addEventListener('mousemove', (e) => {
       mx = (e.clientX / window.innerWidth - 0.5) * 2;
       my = (e.clientY / window.innerHeight - 0.5) * 2;
+      kick();
     }, { passive: true });
-    raf = requestAnimationFrame(tick);
+    kick();
   }
 
   /* ---------- Project overlay ---------- */
