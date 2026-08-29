@@ -1,5 +1,5 @@
 /* ================================================================
-   SITEFORGE — dark cinematic portfolio
+   SITEFORGE, dark cinematic portfolio
    Inspired by award-winning single-screen portfolio design.
    Black atmosphere, film grain, huge type, floating work.
    ================================================================ */
@@ -303,7 +303,7 @@ button { font-family: inherit; }
 }
 .hero-title {
   /* Cap sized so "DESIGNER." always fits the left hero column at any
-     viewport — a larger cap gets clipped by the reveal animation's
+     viewport, a larger cap gets clipped by the reveal animation's
      overflow:hidden (the "invisible R" bug). */
   font-size: clamp(54px, 9vw, 132px);
   font-weight: 800;
@@ -699,11 +699,12 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
 }
 .card-more li + li { margin-top: 10px; }
 .card-more li::before {
-  content: "—";
+  content: "◼";
   position: absolute;
   left: 0;
-  top: 0;
-  font-weight: 600;
+  top: 3px;
+  font-size: 9px;
+  font-weight: 400;
   color: var(--fg);
   transition: color 0.45s var(--ease);
 }
@@ -1042,4 +1043,22 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
 @media (prefers-reduced-motion: reduce) {
   .hero-lines { animation: none; }
   .line-pulse, .line-pulse-glow { animation: none; opacity: 0; }
+}
+
+/* ---------- Proximity glow on hero letters ---------- */
+.hero-title { user-select: none; -webkit-user-select: none; }
+/* Breathing room inside the reveal's overflow:hidden so glow isn't
+   clipped; padding/negative-margin cancel out, layout untouched. */
+.hero-title .line { padding: 0.3em 0.2em; margin: -0.3em -0.2em; }
+.ht-char { position: relative; display: inline-block; }
+.ht-char::after {
+  content: attr(data-c);
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  color: #fff;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.5), 0 0 38px rgba(255, 255, 255, 0.22);
+  opacity: var(--glow, 0);
+  will-change: opacity;
 }
