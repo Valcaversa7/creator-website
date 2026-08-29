@@ -157,14 +157,18 @@
     kick();
   }
 
-  /* ---------- Proximity glow on hero title letters ---------- */
+  /* ---------- Huly-style spotlight on hero title letters ---------- */
   const heroTitle = $('.hero-title');
   if (heroTitle && !isCoarse && !reduceMotion) {
-    const chars = $$('.ht-char', heroTitle).map(el => ({ el, x: 0, y: 0, g: 0, prev: '' }));
-    const R = 230; // glow falloff radius in px
+    const chars = $$('.ht-char', heroTitle).map(el => ({
+      el, l: 0, t: 0, cx: 0, cy: 0, sx: '', sy: '', lit: false
+    }));
+    const R = 250;          // spotlight radius (matches the CSS mask)
+    const RANGE = R + 180;  // glyph activation margin
+    const ambient = $('#heroAmbient');
     const hero = $('.hero');
-    let mx = -9999, my = -9999;      // raw cursor
-    let lx = -9999, ly = -9999;      // lerped "light" position
+    let mx = -9999, my = -9999;   // raw cursor
+    let lx = -9999, ly = -9999;   // lerped light position
     let seen = false;
     let rectsDirty = true;
     let heroVisible = true;
@@ -173,51 +177,59 @@
     const readRects = () => {
       for (const c of chars) {
         const r = c.el.getBoundingClientRect();
-        c.x = r.left + r.width / 2;
-        c.y = r.top + r.height / 2;
+        c.l = r.left; c.t = r.top;
+        c.cx = r.left + r.width / 2;
+        c.cy = r.top + r.height / 2;
       }
       rectsDirty = false;
-    };
-
-    // smoothstep falloff: 0 at R, 1 at the cursor, soft at both ends
-    const influence = (c) => {
-      const dx = c.x - lx, dy = c.y - ly;
-      const d = Math.sqrt(dx * dx + dy * dy);
-      if (d >= R) return 0;
-      const t = 1 - d / R;
-      return t * t * (3 - 2 * t);
     };
 
     const tick = () => {
       raf = null;
       if (!heroVisible || !seen) return;
       if (rectsDirty) readRects();
-      lx += (mx - lx) * 0.18; // light position lags the cursor slightly -> smooth sweep
-      ly += (my - ly) * 0.18;
-      let live = 0;
+      lx += (mx - lx) * 0.16;   // light trails the cursor: smooth beam sweep
+      ly += (my - ly) * 0.16;
+      if (ambient) ambient.style.transform =
+        'translate3d(' + lx.toFixed(1) + 'px, ' + ly.toFixed(1) + 'px, 0)';
+      let active = 0;
       for (const c of chars) {
-        const target = influence(c);
-        c.g += (target - c.g) * 0.16; // per-letter intensity lerp: no jumps
-        if (c.g < 0.0015 && target === 0) c.g = 0;
-        if (c.g > 0) live++;
-        const next = c.g.toFixed(3);
-        if (next !== c.prev) {
-          c.el.style.setProperty('--glow', next);
-          c.prev = next;
+        const dx = c.cx - lx, dy = c.cy - ly;
+        const on = (dx * dx + dy * dy) < RANGE * RANGE;
+        if (on) {
+          active++;
+          if (!c.lit) { c.el.style.setProperty('--lit', '1'); c.lit = true; }
+          const sx = (lx - c.l).toFixed(1) + 'px';
+          const sy = (ly - c.t).toFixed(1) + 'px';
+          if (sx !== c.sx) { c.el.style.setProperty('--sx', sx); c.sx = sx; }
+          if (sy !== c.sy) { c.el.style.setProperty('--sy', sy); c.sy = sy; }
+        } else if (c.lit) {
+          c.el.style.setProperty('--lit', '0');
+          c.el.style.setProperty('--sx', '-999px');
+          c.el.style.setProperty('--sy', '-999px');
+          c.sx = ''; c.sy = ''; c.lit = false;
         }
       }
-      // keep animating while light moves or letters fade; sleep when still
-      if (live > 0 || Math.abs(mx - lx) > 0.5 || Math.abs(my - ly) > 0.5) {
-        raf = requestAnimationFrame(tick);
-      }
+      const settled = Math.abs(mx - lx) < 0.3 && Math.abs(my - ly) < 0.3;
+      if (active > 0 || !settled) raf = requestAnimationFrame(tick);
     };
     const kick = () => { if (raf === null && heroVisible && seen) raf = requestAnimationFrame(tick); };
 
     window.addEventListener('mousemove', (e) => {
       mx = e.clientX; my = e.clientY;
-      if (!seen) { lx = mx; ly = my; seen = true; }
+      if (!seen) {
+        lx = mx; ly = my;
+        seen = true;
+        if (ambient) ambient.classList.add('is-on');
+      }
       kick();
     }, { passive: true });
+    document.addEventListener('mouseleave', () => {
+      if (ambient) ambient.classList.remove('is-on');
+    });
+    document.addEventListener('mouseenter', () => {
+      if (ambient && seen) ambient.classList.add('is-on');
+    });
 
     window.addEventListener('scroll', () => { rectsDirty = true; kick(); }, { passive: true });
     window.addEventListener('resize', () => { rectsDirty = true; kick(); }, { passive: true });
