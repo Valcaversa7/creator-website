@@ -184,6 +184,10 @@ function build() {
     if (/^https?:\/\//i.test(url) || url.startsWith('//') || url.startsWith('data:')) {
       return full;
     }
+    // skip Vercel-specific paths (analytics, speed insights, etc.)
+    if (url.startsWith('/_vercel/')) {
+      return full;
+    }
     // only rewrite local CSS/JS references
     if (!/\.(css|js)(\?|$)/i.test(url)) return full;
     const base = path.basename(url).split('?')[0];
@@ -202,10 +206,17 @@ function build() {
   // If index.html referenced the file with a subpath, also rewrite
   // occurrences of `styles.css` and `script.js` inside the (new) files
   // in case any text references slipped through. Our files don't, but
-  // it's defensive.
+  // it's defensive. Skip replacements that would affect Vercel paths.
   for (const { from, to } of replacements) {
     const re = new RegExp(from.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
-    html = html.replace(re, to);
+    html = html.replace(re, (match, offset) => {
+      // Don't replace if it's part of a /_vercel/ path
+      const before = html.slice(Math.max(0, offset - 20), offset);
+      if (before.includes('/_vercel/')) {
+        return match;
+      }
+      return to;
+    });
   }
 
   // ------------------------------------------------------------------
