@@ -1,5 +1,5 @@
 /**
- * SiteForge — interactions
+ * SiteForge, interactions
  * Preloader with % counter, hero parallax, project overlay,
  * click-to-copy email, service toggles, reveals, mobile nav, form.
  */
@@ -111,7 +111,7 @@
   /* ---------- Hero floating-card parallax (perf-tuned) ---------- */
   const parallaxEls = $$('.parallax');
   if (parallaxEls.length && !isCoarse && !reduceMotion) {
-    // cache depth & tilt once — no per-frame DOM/style reads
+    // cache depth & tilt once, no per-frame DOM/style reads
     const items = parallaxEls.map(el => ({
       el,
       depth: parseFloat(el.dataset.depth || '20'),
@@ -135,7 +135,7 @@
       paint();
       if (Math.abs(mx - cx) < 0.0004 && Math.abs(my - cy) < 0.0004) {
         cx = mx; cy = my;
-        paint(); // snap exactly to rest, then stop looping — zero cost while idle
+        paint(); // snap exactly to rest, then stop looping, zero cost while idle
         return;
       }
       raf = requestAnimationFrame(tick);
@@ -162,20 +162,20 @@
     nova: {
       num: '01',
       title: 'Nova Architecture',
-      type: 'Architecture — Website Concept',
-      text: 'A SiteForge concept exploring how an architecture studio could present itself online — full-bleed monochrome project imagery, case-study layouts and a calm, confident enquiry flow. Designed to show the level of website your studio could have.'
+      type: 'Architecture · Website Concept',
+      text: 'A SiteForge concept exploring how an architecture studio could present itself online, full-bleed monochrome project imagery, case-study layouts and a calm, confident enquiry flow. Designed to show the level of website your studio could have.'
     },
     form: {
       num: '02',
       title: 'Form Furniture',
-      type: 'Furniture — Website Concept',
-      text: 'A SiteForge concept for a furniture maker\u2019s online store — editorial product pages, a lightning-fast catalogue and a nearly frictionless checkout path, composed to feel like flipping through a printed lookbook. Yours could work the same way.'
+      type: 'Furniture · Website Concept',
+      text: 'A SiteForge concept for a furniture maker\u2019s online store: editorial product pages, a lightning-fast catalogue and a nearly frictionless checkout path, composed to feel like flipping through a printed lookbook. Yours could work the same way.'
     },
     saffron: {
       num: '03',
       title: 'Saffron & Salt',
-      type: 'Restaurant — Website Concept',
-      text: 'A SiteForge concept for a restaurant that wants photography to do the selling — moody imagery, a menu that updates in minutes, reservations linked up and directions one tap away. Imagine it dressed in your brand instead.'
+      type: 'Restaurant · Website Concept',
+      text: 'A SiteForge concept for a restaurant that wants photography to do the selling: moody imagery, a menu that updates in minutes, reservations linked up and directions one tap away. Imagine it dressed in your brand instead.'
     }
   };
 
@@ -230,7 +230,7 @@
         } catch (err2) { ok = false; }
       }
       if (copyNote) {
-        copyNote.textContent = ok ? 'Email copied!' : 'Copy failed — select it manually';
+        copyNote.textContent = ok ? 'Email copied!' : 'Copy failed, select it manually';
         setTimeout(() => { copyNote.textContent = ''; }, 2200);
       }
     });
@@ -289,7 +289,7 @@
       const data = Object.fromEntries(new FormData(form).entries());
       console.log('Contact form submission:', data);
       submitText.textContent = 'SENT ✓';
-      note.textContent = "Thanks — I'll be in touch within a few hours.";
+      note.textContent = "Thanks, I'll be in touch within a few hours.";
       note.classList.add('success');
       form.reset();
       setTimeout(() => { submitText.textContent = 'SEND REQUEST'; }, 4000);
