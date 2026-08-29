@@ -1056,13 +1056,8 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
   left: 0;
   top: 0;
   pointer-events: none;
-  /* Dense gold-white light, clipped INSIDE the letterform — no blur,
-     no halo outside the glyphs. Crisp edges by design. */
-  background: linear-gradient(104deg, #ffffff 0%, #fff2cf 34%, #ffd97e 64%, #f0b64d 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  color: #fff;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.5), 0 0 38px rgba(255, 255, 255, 0.22);
   opacity: var(--glow, 0);
   will-change: opacity;
 }

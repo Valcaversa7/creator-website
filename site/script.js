@@ -179,14 +179,13 @@
       rectsDirty = false;
     };
 
-    // dense falloff: full-strength plateau around the cursor, quick
-    // but soft drop to zero at the radius edge
+    // smoothstep falloff: 0 at R, 1 at the cursor, soft at both ends
     const influence = (c) => {
       const dx = c.x - lx, dy = c.y - ly;
       const d = Math.sqrt(dx * dx + dy * dy);
       if (d >= R) return 0;
       const t = 1 - d / R;
-      return Math.min(1, t * t * (3 - 2 * t) * 1.6);
+      return t * t * (3 - 2 * t);
     };
 
     const tick = () => {
