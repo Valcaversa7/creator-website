@@ -1045,6 +1045,71 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
   .line-pulse, .line-pulse-glow { animation: none; opacity: 0; }
 }
 
+/* ---------- Aftercare ---------- */
+.aftercare-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+@media (max-width: 800px) { .aftercare-grid { grid-template-columns: 1fr; } }
+
+.aftercare-card {
+  position: relative;
+  padding: 44px 34px 40px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: transparent;
+  transition: background 0.45s var(--ease), color 0.45s var(--ease);
+}
+.aftercare-card:hover { background: #f4f4f2; color: #0a0a0b; }
+.aftercare-card:hover .card-num { color: rgba(10, 10, 11, 0.45); }
+.aftercare-card:hover .card-title { color: #0a0a0b; }
+.aftercare-card:hover .card-text { color: rgba(10, 10, 11, 0.72); }
+.aftercare-card:hover .open-list li { color: rgba(10, 10, 11, 0.72); }
+.aftercare-card:hover .open-list li::before { color: #0a0a0b; }
+
+.open-list { list-style: none; margin-top: 22px; padding: 0; }
+.open-list li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+  transition: color 0.45s var(--ease);
+}
+.open-list li + li { margin-top: 10px; }
+.open-list li::before {
+  content: "◼";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  font-size: 9px;
+  font-weight: 400;
+  color: var(--fg);
+  transition: color 0.45s var(--ease);
+}
+
+.aftercare-cta {
+  margin-top: clamp(48px, 6vw, 72px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 36px 40px;
+  border: 1px solid var(--line-strong);
+  border-radius: 12px;
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01));
+}
+.aftercare-note {
+  font-size: clamp(15px, 1.4vw, 17px);
+  color: var(--muted);
+  max-width: 52ch;
+}
+@media (max-width: 640px) { .aftercare-cta { padding: 28px 22px; } }
+
 /* ---------- Proximity glow on hero letters ---------- */
 .hero-title { user-select: none; -webkit-user-select: none; }
 /* Breathing room inside the reveal's overflow:hidden so glow isn't
