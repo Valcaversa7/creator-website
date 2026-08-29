@@ -3,52 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="I design and build modern, professional websites for businesses that help you look credible, get found online, and win more customers." />
-  <meta name="theme-color" content="#000000" />
-  <title>SiteForge — Premium Websites for Modern Businesses</title>
+  <meta name="description" content="SiteForge, a web design studio building modern, high-performance websites for businesses. More to discover beneath the surface." />
+  <meta name="theme-color" content="#0a0a0b" />
+  <title>SiteForge · Web Designer</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- Custom cursor follower -->
-  <div class="cursor-dot" aria-hidden="true"></div>
-  <div class="cursor-ring" aria-hidden="true"></div>
+  <!-- Film grain overlay -->
+  <div class="grain" aria-hidden="true"></div>
 
-  <!-- Page-load overlay -->
+  <!-- Page-load preloader -->
   <div class="loader" id="loader" aria-hidden="true">
-    <div class="loader-inner">
-      <div class="loader-mark">SITEFORGE</div>
-      <div class="loader-bar"><span></span></div>
-    </div>
+    <div class="loader-brand">SITEFORGE</div>
+    <div class="loader-count" id="loaderCount">0%</div>
   </div>
 
   <!-- Navigation -->
   <header class="nav" id="nav">
-    <div class="container nav-inner">
-      <a href="#home" class="nav-logo" aria-label="Home">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo" aria-label="SiteForge home">
         <span class="logo-mark">◼</span>
         <span class="logo-text">SITEFORGE</span>
       </a>
 
       <nav class="nav-links" id="navLinks" aria-label="Primary">
-        <a href="#home" class="nav-link">HOME</a>
-        <a href="#services" class="nav-link">SERVICES</a>
-        <a href="#work" class="nav-link">WORK</a>
-        <a href="#process" class="nav-link">PROCESS</a>
-        <a href="#pricing" class="nav-link">PRICING</a>
-        <a href="#contact" class="nav-link">CONTACT</a>
+        <a href="#work" class="nav-link">Concepts</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
-      <a href="#contact" class="btn btn-primary nav-cta">GET STARTED</a>
-
-  <!-- Personal contact: name, Indian phone (+91 9176300158), email -->
-  <!-- To change these site-wide, search for "siteforge" or "9176300158" in this file. -->
+      <a href="#contact" class="nav-availability" aria-label="Availability: currently accepting new projects">
+        <span class="avail-dot" aria-hidden="true"></span> Available
+      </a>
 
       <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -56,85 +50,214 @@
     </div>
   </header>
 
-  <main>
+  <main id="pageContent">
 
-    <!-- HERO -->
+    <!-- HERO, single immersive screen -->
     <section class="hero" id="home">
-      <div class="container hero-inner">
-        <div class="hero-eyebrow reveal">
-          <span class="eyebrow-dot"></span>
-          <span>FREELANCE WEB DESIGNER</span>
+
+      <div class="hero-glow hero-glow-a" aria-hidden="true"></div>
+      <div class="hero-glow hero-glow-b" aria-hidden="true"></div>
+      <div class="hero-horizon" aria-hidden="true"></div>
+
+      <!-- Glowing squiggle lines (hero background only) -->
+      <svg class="hero-lines" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+        <path class="line-base" d="M-120 260 C 240 60, 520 380, 820 300 S 1240 120, 1580 380" />
+        <path class="line-pulse-glow p1" pathLength="1000" d="M-120 260 C 240 60, 520 380, 820 300 S 1240 120, 1580 380" />
+        <path class="line-pulse p1" pathLength="1000" d="M-120 260 C 240 60, 520 380, 820 300 S 1240 120, 1580 380" />
+        <path class="line-base" d="M-120 640 C 240 780, 460 500, 760 640 S 1200 800, 1580 560" />
+        <path class="line-pulse-glow p2" pathLength="1000" d="M-120 640 C 240 780, 460 500, 760 640 S 1200 800, 1580 560" />
+        <path class="line-pulse p2" pathLength="1000" d="M-120 640 C 240 780, 460 500, 760 640 S 1200 800, 1580 560" />
+        <path class="line-base" d="M-120 470 C 260 380, 420 560, 700 480 S 1060 400, 1580 500" />
+        <path class="line-pulse-glow p3" pathLength="1000" d="M-120 470 C 260 380, 420 560, 700 480 S 1060 400, 1580 500" />
+        <path class="line-pulse p3" pathLength="1000" d="M-120 470 C 260 380, 420 560, 700 480 S 1060 400, 1580 500" />
+      </svg>
+
+      <!-- Hidden layer: website/UI previews revealed by the cursor lens -->
+      <div class="hero-secret" id="heroSecret" aria-hidden="true">
+        <div class="mock mock-browser" style="left:4%; top:12%; width:250px; transform:rotate(-5deg)">
+          <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url"></span></div>
+          <img src="assets/work-1.jpg" alt="" loading="lazy" />
+          <div class="mock-lines"><span style="width:72%"></span><span style="width:46%"></span></div>
         </div>
-
-        <h1 class="hero-title">
-          <span class="line"><span class="line-inner">YOUR BUSINESS DESERVES</span></span>
-          <span class="line"><span class="line-inner">A <em>BETTER</em> WEBSITE.</span></span>
-        </h1>
-
-        <p class="hero-sub reveal">
-          I create modern, professional websites that help businesses
-          look credible, stand out online, and get more customers.
-        </p>
-
-        <div class="hero-ctas reveal">
-          <a href="#contact" class="btn btn-primary btn-lg">
-            <span>GET YOUR WEBSITE</span>
-            <span class="btn-arrow" aria-hidden="true">→</span>
-          </a>
-          <a href="#work" class="btn btn-ghost btn-lg">
-            <span>SEE MY WORK</span>
-          </a>
+        <div class="mock mock-nav" style="left:29%; top:5%; transform:rotate(2deg)">
+          <span class="dot"></span>
+          <span class="lk"></span><span class="lk"></span><span class="lk"></span><span class="lk"></span>
+          <span class="btn"></span>
         </div>
-
-        <div class="hero-meta reveal">
-          <div class="meta-item">
-            <span class="meta-num">60+</span>
-            <span class="meta-label">Projects shipped</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-num">5★</span>
-            <span class="meta-label">Client rating</span>
-          </div>
-          <div class="meta-item">
-            <span class="meta-num">14d</span>
-            <span class="meta-label">Avg. delivery</span>
-          </div>
+        <div class="mock mock-hero" style="left:25%; top:40%; width:270px; transform:rotate(-2deg)">
+          <span class="h1" style="width:82%"></span>
+          <span class="h1" style="width:58%"></span>
+          <span class="p" style="width:90%"></span>
+          <span class="p" style="width:64%"></span>
+          <div class="row"><span class="b1"></span><span class="b2"></span></div>
+        </div>
+        <div class="mock mock-browser" style="left:58%; top:58%; width:255px; transform:rotate(-3deg)">
+          <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url"></span></div>
+          <img src="assets/work-3.jpg" alt="" loading="lazy" />
+          <div class="mock-lines"><span style="width:64%"></span><span style="width:38%"></span></div>
+        </div>
+        <div class="mock mock-price" style="left:77%; top:14%; width:215px; transform:rotate(4deg)">
+          <span class="tag"></span>
+          <span class="price"></span>
+          <span class="fl" style="width:86%"></span>
+          <span class="fl" style="width:70%"></span>
+          <span class="fl" style="width:78%"></span>
+          <span class="cta"></span>
+        </div>
+        <div class="mock mock-browser" style="left:10%; top:64%; width:225px; transform:rotate(3deg)">
+          <div class="mock-bar"><i></i><i></i><i></i><span class="mock-url"></span></div>
+          <img src="assets/work-2.jpg" alt="" loading="lazy" />
+          <div class="mock-lines"><span style="width:58%"></span><span style="width:42%"></span></div>
+        </div>
+        <div class="mock mock-form" style="left:45%; top:82%; width:250px; transform:rotate(1.5deg)">
+          <span class="lbl"></span>
+          <span class="inp"></span>
+          <span class="lbl" style="width:34%"></span>
+          <span class="inp"></span>
+          <span class="send"></span>
+        </div>
+        <div class="mock mock-btns" style="left:83%; top:78%; transform:rotate(-2deg)">
+          <span class="b1"></span><span class="b2"></span>
         </div>
       </div>
 
-      <!-- Floating preview tile (parallax) -->
-      <div class="hero-float parallax" data-parallax="-40">
-        <div class="float-card">
-          <div class="float-window">
-            <span></span><span></span><span></span>
-          </div>
-          <div class="float-body">
-            <div class="float-line w-80"></div>
-            <div class="float-line w-60"></div>
-            <div class="float-line w-40"></div>
-            <div class="float-grid">
-              <div></div><div></div><div></div>
-            </div>
+      <div class="hero-inner">
+
+        <div class="hero-copy">
+          <p class="hero-eyebrow reveal">SiteForge · Web design studio</p>
+          <h1 class="hero-title" aria-label="WEB DESIGNER.">
+            <span class="line" aria-hidden="true"><span class="line-inner"><span class="ht-char" data-c="W">W</span><span class="ht-char" data-c="E">E</span><span class="ht-char" data-c="B">B</span></span></span>
+            <span class="line" aria-hidden="true"><span class="line-inner"><span class="ht-char" data-c="D">D</span><span class="ht-char" data-c="E">E</span><span class="ht-char" data-c="S">S</span><span class="ht-char" data-c="I">I</span><span class="ht-char" data-c="G">G</span><span class="ht-char" data-c="N">N</span><span class="ht-char" data-c="E">E</span><span class="ht-char" data-c="R">R</span><em class="title-dot ht-char" data-c=".">.</em></span></span>
+          </h1>
+          <p class="hero-sub reveal">
+            Building modern, high-performance websites for businesses, with more to discover beneath the surface.
+          </p>
+          <div class="hero-ctas reveal">
+            <a href="#work" class="btn btn-solid"><span>SEE THE CONCEPTS</span><span class="btn-arrow" aria-hidden="true">→</span></a>
+            <a href="#contact" class="btn btn-ghost"><span>START A PROJECT</span></a>
           </div>
         </div>
+
+        <!-- Floating project cards -->
+        <div class="hero-stack" aria-hidden="false">
+          <button type="button" class="float-card parallax" data-depth="26" data-project="nova" aria-haspopup="dialog">
+            <span class="float-media"><img src="assets/work-1.jpg" alt="Nova Architecture, website project" /></span>
+            <span class="float-meta"><span class="float-num">01</span><span class="float-name">Nova Architecture</span><span class="float-tag">Concept</span></span>
+          </button>
+          <button type="button" class="float-card parallax" data-depth="44" data-project="form" aria-haspopup="dialog">
+            <span class="float-media"><img src="assets/work-2.jpg" alt="Form Furniture, e-commerce project" /></span>
+            <span class="float-meta"><span class="float-num">02</span><span class="float-name">Form Furniture</span><span class="float-tag">Concept</span></span>
+          </button>
+          <button type="button" class="float-card parallax" data-depth="16" data-project="saffron" aria-haspopup="dialog">
+            <span class="float-media"><img src="assets/work-3.jpg" alt="Saffron &amp; Salt, restaurant website project" /></span>
+            <span class="float-meta"><span class="float-num">03</span><span class="float-name">Saffron &amp; Salt</span><span class="float-tag">Concept</span></span>
+          </button>
+        </div>
+
+        <!-- Index list -->
+        <nav class="hero-index" aria-label="Project index">
+          <span class="index-label">Index</span>
+          <button type="button" class="index-item" data-project="nova">Nova Architecture</button>
+          <button type="button" class="index-item" data-project="form">Form Furniture</button>
+          <button type="button" class="index-item" data-project="saffron">Saffron &amp; Salt</button>
+        </nav>
       </div>
 
-      <!-- Decorative marquee -->
-      <div class="marquee" aria-hidden="true">
-        <div class="marquee-track">
-          <span>RESPONSIVE</span><span>·</span>
-          <span>FAST</span><span>·</span>
-          <span>MODERN</span><span>·</span>
-          <span>CREDIBLE</span><span>·</span>
-          <span>SEARCH READY</span><span>·</span>
-          <span>CONVERSION FOCUSED</span><span>·</span>
-          <span>RESPONSIVE</span><span>·</span>
-          <span>FAST</span><span>·</span>
-          <span>MODERN</span><span>·</span>
-          <span>CREDIBLE</span><span>·</span>
-          <span>SEARCH READY</span><span>·</span>
-          <span>CONVERSION FOCUSED</span><span>·</span>
+      <div class="hero-foot">
+        <button type="button" class="copy-email" id="copyEmail" data-email="email@example.com" aria-label="Copy email address">
+          <span class="foot-label">Contact</span>
+          <span class="foot-value" id="copyEmailText">email@example.com</span>
+          <span class="copy-note" id="copyNote" role="status" aria-live="polite"></span>
+        </button>
+        <div class="hero-foot-mid">
+          <span class="foot-label">Availability</span>
+          <span class="foot-value">Accepting projects</span>
         </div>
+        <div class="hero-foot-right">
+          <span class="foot-label">Scroll</span>
+          <span class="scroll-cue" aria-hidden="true">↓</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>RESPONSIVE</span><span>·</span>
+        <span>FAST</span><span>·</span>
+        <span>MODERN</span><span>·</span>
+        <span>CREDIBLE</span><span>·</span>
+        <span>SEARCH READY</span><span>·</span>
+        <span>CONVERSION FOCUSED</span><span>·</span>
+        <span>RESPONSIVE</span><span>·</span>
+        <span>FAST</span><span>·</span>
+        <span>MODERN</span><span>·</span>
+        <span>CREDIBLE</span><span>·</span>
+        <span>SEARCH READY</span><span>·</span>
+        <span>CONVERSION FOCUSED</span><span>·</span>
+      </div>
+    </div>
+
+    <!-- WORK, SITEFORGE DESIGN CONCEPTS -->
+    <section class="section" id="work">
+      <div class="container">
+        <header class="section-head">
+          <span class="section-tag reveal">(01) CONCEPTS</span>
+          <h2 class="section-title reveal">WHAT WE<br />CAN <em>build</em></h2>
+          <p class="section-sub reveal">
+            A selection of website concepts designed to show what we can create for businesses
+            across different industries. Every project below is an original SiteForge design
+            exploration, not client work. Imagine yours in its place.
+          </p>
+        </header>
+
+        <figure class="work-piece reveal">
+          <div class="work-frame">
+            <img src="assets/work-1.jpg" alt="Nova Architecture website concept, monochrome architectural photography" loading="lazy" />
+            <span class="concept-badge">SiteForge Concept</span>
+          </div>
+          <figcaption class="work-caption">
+            <span class="cap-num">01</span>
+            <span class="cap-title">Nova Architecture</span>
+            <span class="cap-type">Architecture · Website Concept</span>
+          </figcaption>
+        </figure>
+
+        <figure class="work-piece reveal">
+          <div class="work-frame">
+            <img src="assets/work-2.jpg" alt="Form Furniture store concept, monochrome product photography" loading="lazy" />
+            <span class="concept-badge">SiteForge Concept</span>
+          </div>
+          <figcaption class="work-caption">
+            <span class="cap-num">02</span>
+            <span class="cap-title">Form Furniture</span>
+            <span class="cap-type">Furniture · Website Concept</span>
+          </figcaption>
+        </figure>
+
+        <figure class="work-piece reveal">
+          <div class="work-frame">
+            <img src="assets/work-3.jpg" alt="Saffron and Salt restaurant website concept, monochrome food photography" loading="lazy" />
+            <span class="concept-badge">SiteForge Concept</span>
+          </div>
+          <figcaption class="work-caption">
+            <span class="cap-num">03</span>
+            <span class="cap-title">Saffron &amp; Salt</span>
+            <span class="cap-type">Restaurant · Website Concept</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- CONCEPTS CTA -->
+    <section class="cta-band">
+      <div class="container cta-band-inner reveal">
+        <h2 class="cta-band-title">Want to see your business<br />as a <em>SiteForge</em> website?</h2>
+        <p class="cta-band-sub">Tell us about your business and we&rsquo;ll show you what we can create.</p>
+        <a href="#contact" class="btn btn-solid btn-lg">
+          <span>START A PROJECT</span>
+          <span class="btn-arrow" aria-hidden="true">&rarr;</span>
+        </a>
       </div>
     </section>
 
@@ -142,166 +265,116 @@
     <section class="section" id="services">
       <div class="container">
         <header class="section-head">
-          <span class="section-tag reveal">(01) SERVICES</span>
+          <span class="section-tag reveal">(02) SERVICES</span>
           <h2 class="section-title reveal">WHAT I BUILD</h2>
           <p class="section-sub reveal">
-            Clean, fast, conversion-focused websites purpose-built for the way your business actually works.
+            Clean, fast, conversion-focused websites, purpose-built for the way your business actually works.
           </p>
         </header>
 
         <div class="services-grid">
           <article class="service-card reveal">
             <span class="card-num">01</span>
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <rect x="3" y="4" width="18" height="14" rx="1.5"/>
-                <path d="M3 8h18"/>
-                <path d="M8 21h8"/>
-              </svg>
-            </div>
             <h3 class="card-title">Business Websites</h3>
             <p class="card-text">A complete, professional site that tells your story and turns visitors into customers.</p>
-            <span class="card-link">Learn more →</span>
+            <button type="button" class="card-link card-toggle" aria-expanded="false" aria-controls="more-1">
+              <span class="card-toggle-label">Learn more</span>
+              <span class="card-toggle-arrow" aria-hidden="true">→</span>
+            </button>
+            <ul class="card-more" id="more-1">
+              <li>Goals &amp; audience call before any design work starts</li>
+              <li>Home, About, Services &amp; Contact pages included</li>
+              <li>Custom design built around your brand, nothing templated</li>
+              <li>SEO basics + analytics configured</li>
+              <li>Live in as little as 14 days</li>
+            </ul>
           </article>
 
           <article class="service-card reveal">
             <span class="card-num">02</span>
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <path d="M4 4h16v12H4z"/>
-                <path d="M4 20h16"/>
-                <path d="M8 16v4"/>
-                <path d="M16 16v4"/>
-              </svg>
-            </div>
             <h3 class="card-title">Landing Pages</h3>
             <p class="card-text">High-converting single pages built to sell one product, service or offer.</p>
-            <span class="card-link">Learn more →</span>
+            <button type="button" class="card-link card-toggle" aria-expanded="false" aria-controls="more-2">
+              <span class="card-toggle-label">Learn more</span>
+              <span class="card-toggle-arrow" aria-hidden="true">→</span>
+            </button>
+            <ul class="card-more" id="more-2">
+              <li>One page, one goal: total focus on your offer</li>
+              <li>Headline &amp; message sharpened to convert visitors</li>
+              <li>Lead or contact form built in</li>
+              <li>Loads in under a second</li>
+              <li>Ready for ad traffic from day one</li>
+            </ul>
           </article>
 
           <article class="service-card reveal">
             <span class="card-num">03</span>
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <path d="M5 3v18"/>
-                <path d="M5 5h11a3 3 0 0 1 0 6H5"/>
-                <path d="M5 11h13a3 3 0 0 1 0 6H5"/>
-              </svg>
-            </div>
             <h3 class="card-title">Restaurant Websites</h3>
-            <p class="card-text">Menus, reservations, location and atmosphere — designed to bring guests through the door.</p>
-            <span class="card-link">Learn more →</span>
+            <p class="card-text">Menus, reservations, location and atmosphere, designed to bring guests through the door.</p>
+            <button type="button" class="card-link card-toggle" aria-expanded="false" aria-controls="more-3">
+              <span class="card-toggle-label">Learn more</span>
+              <span class="card-toggle-arrow" aria-hidden="true">→</span>
+            </button>
+            <ul class="card-more" id="more-3">
+              <li>Digital menu that's easy to update anytime</li>
+              <li>Reservations &amp; online orders linked up</li>
+              <li>Maps, directions &amp; opening hours</li>
+              <li>Photo gallery to show off the atmosphere</li>
+              <li>Call buttons built in</li>
+            </ul>
           </article>
 
           <article class="service-card reveal">
             <span class="card-num">04</span>
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <rect x="3" y="3" width="8" height="8"/>
-                <rect x="13" y="3" width="8" height="8"/>
-                <rect x="3" y="13" width="8" height="8"/>
-                <rect x="13" y="13" width="8" height="8"/>
-              </svg>
-            </div>
             <h3 class="card-title">Portfolio Websites</h3>
             <p class="card-text">A bold showcase of your work that makes a strong first impression on every visitor.</p>
-            <span class="card-link">Learn more →</span>
+            <button type="button" class="card-link card-toggle" aria-expanded="false" aria-controls="more-4">
+              <span class="card-toggle-label">Learn more</span>
+              <span class="card-toggle-arrow" aria-hidden="true">→</span>
+            </button>
+            <ul class="card-more" id="more-4">
+              <li>Gallery layout that puts your work front and centre</li>
+              <li>Case studies with results &amp; client testimonials</li>
+              <li>About page that tells your story</li>
+              <li>Commission / enquiry form included</li>
+              <li>Fast image loading on any device</li>
+            </ul>
           </article>
 
           <article class="service-card reveal">
             <span class="card-num">05</span>
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <path d="M3 7h18"/>
-                <path d="M3 12h18"/>
-                <path d="M3 17h12"/>
-                <circle cx="19" cy="17" r="2"/>
-              </svg>
-            </div>
             <h3 class="card-title">Service Business Websites</h3>
-            <p class="card-text">Built for plumbers, salons, agencies and trades — with quote forms that actually convert.</p>
-            <span class="card-link">Learn more →</span>
+            <p class="card-text">Built for plumbers, salons, agencies and trades, with quote forms that actually convert.</p>
+            <button type="button" class="card-link card-toggle" aria-expanded="false" aria-controls="more-5">
+              <span class="card-toggle-label">Learn more</span>
+              <span class="card-toggle-arrow" aria-hidden="true">→</span>
+            </button>
+            <ul class="card-more" id="more-5">
+              <li>Clear services list with "prices from" shown</li>
+              <li>Quote request form that turns visits into jobs</li>
+              <li>Click-to-call buttons on every screen</li>
+              <li>Service areas &amp; customer reviews sections</li>
+              <li>Local SEO so nearby customers find you first</li>
+            </ul>
           </article>
 
           <article class="service-card reveal">
             <span class="card-num">06</span>
-            <div class="card-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <path d="M12 2l3 6 6 1-4.5 4 1 6L12 16l-5.5 3 1-6L3 9l6-1z"/>
-              </svg>
-            </div>
             <h3 class="card-title">Custom Websites</h3>
             <p class="card-text">Have something specific in mind? I'll design and build exactly what your business needs.</p>
-            <span class="card-link">Learn more →</span>
+            <button type="button" class="card-link card-toggle" aria-expanded="false" aria-controls="more-6">
+              <span class="card-toggle-label">Learn more</span>
+              <span class="card-toggle-arrow" aria-hidden="true">→</span>
+            </button>
+            <ul class="card-more" id="more-6">
+              <li>Scoped in detail together before we start</li>
+              <li>E-commerce, booking, payments &amp; memberships</li>
+              <li>Custom animations &amp; interactions</li>
+              <li>Integrations &amp; automations with your tools</li>
+              <li>Fixed quote agreed up front, no surprises</li>
+            </ul>
           </article>
         </div>
-      </div>
-    </section>
-
-    <!-- WHY -->
-    <section class="section section-alt" id="why">
-      <div class="container">
-        <header class="section-head">
-          <span class="section-tag reveal">(02) WHY</span>
-          <h2 class="section-title reveal">WHY YOUR BUSINESS<br/>NEEDS A WEBSITE</h2>
-        </header>
-
-        <div class="why-grid">
-          <div class="why-item reveal">
-            <span class="why-num">01</span>
-            <h3 class="why-title">LOOK PROFESSIONAL</h3>
-            <p class="why-text">Give customers a place to learn about your business and build trust.</p>
-          </div>
-          <div class="why-item reveal">
-            <span class="why-num">02</span>
-            <h3 class="why-title">GET FOUND ONLINE</h3>
-            <p class="why-text">Give your business a professional presence on the web.</p>
-          </div>
-          <div class="why-item reveal">
-            <span class="why-num">03</span>
-            <h3 class="why-title">MOBILE READY</h3>
-            <p class="why-text">Make your business accessible from phones, tablets, and desktops.</p>
-          </div>
-          <div class="why-item reveal">
-            <span class="why-num">04</span>
-            <h3 class="why-title">GET MORE CUSTOMERS</h3>
-            <p class="why-text">Turn website visitors into potential customers.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- PORTFOLIO -->
-    <section class="section" id="work">
-      <div class="container">
-        <!--
-          ============================================================
-          ADD YOUR PROJECTS HERE.
-          Duplicate one <article class="work-card reveal"> ... </article>
-          block for each project. The grid auto-fills and is responsive
-          (2 columns on desktop, 1 on mobile).
-
-          Inside .work-preview, replace the <div class="mock ..."> with
-          an <img> tag once you have screenshots, e.g.:
-            <img src="assets/project-1.jpg" alt="Project name" />
-          ============================================================
-
-        <div class="work-grid">
-
-          <article class="work-card reveal">
-            <div class="work-preview">
-              <img src="assets/project-1.jpg" alt="Project name" />
-            </div>
-            <div class="work-meta">
-              <span class="work-tag">Business Type</span>
-              <h3 class="work-title">Project Name</h3>
-              <p class="work-text">Short description of the project and what you built for the client.</p>
-              <a href="#" class="btn btn-ghost">VIEW PROJECT →</a>
-            </div>
-          </article>
-
-        </div>
-        -->
       </div>
     </section>
 
@@ -309,9 +382,9 @@
     <section class="section section-dark" id="process">
       <div class="container">
         <header class="section-head">
-          <span class="section-tag reveal">(04) PROCESS</span>
+          <span class="section-tag reveal">(03) PROCESS</span>
           <h2 class="section-title reveal">HOW IT WORKS</h2>
-          <p class="section-sub reveal">A simple, proven four-step process  from first message to live website.</p>
+          <p class="section-sub reveal">A simple, proven four-step process, from first message to live website.</p>
         </header>
 
         <ol class="process-list">
@@ -327,7 +400,7 @@
             <div class="step-num">02</div>
             <div class="step-body">
               <h3 class="step-title">I DESIGN IT</h3>
-              <p class="step-text">I create a modern design tailored to your business — refined until it feels unmistakably yours.</p>
+              <p class="step-text">I create a modern design tailored to your business, refined until it feels unmistakably yours.</p>
             </div>
             <div class="step-arrow" aria-hidden="true">→</div>
           </li>
@@ -335,7 +408,7 @@
             <div class="step-num">03</div>
             <div class="step-body">
               <h3 class="step-title">I BUILD IT</h3>
-              <p class="step-text">I turn the design into a fast, responsive website — pixel-perfect on every device.</p>
+              <p class="step-text">I turn the design into a fast, responsive website, pixel-perfect on every device.</p>
             </div>
             <div class="step-arrow" aria-hidden="true">→</div>
           </li>
@@ -355,57 +428,45 @@
     <section class="section" id="pricing">
       <div class="container">
         <header class="section-head">
-          <span class="section-tag reveal">(05) PRICING</span>
+          <span class="section-tag reveal">(04) PRICING</span>
           <h2 class="section-title reveal">LET'S TALK</h2>
-          <p class="section-sub reveal">Every business is different. Tell me about yours and I'll send a clear, no-obligation quote — usually within 24 hours.</p>
+          <p class="section-sub reveal">Every business is different. Tell me about yours and I'll send a clear, no-obligation quote, usually within 24 hours.</p>
         </header>
 
-        <div class="pricing-grid pricing-grid-single">
-          <article class="price-card price-card-featured reveal">
+        <div class="pricing-grid">
+          <article class="price-card reveal">
             <span class="price-badge">CUSTOM · TAILORED TO YOU</span>
             <header class="price-head">
               <span class="price-name">CUSTOM</span>
               <span class="price-desc">For businesses that need a unique or more advanced website. Built from scratch around your goals, brand and budget.</span>
             </header>
             <div class="price-amount">
-              <span class="price-value price-value-text" data-price-text>LET'S TALK</span>
+              <span class="price-value">LET'S TALK</span>
             </div>
             <ul class="price-features">
               <li>Fully tailored scope &amp; timeline</li>
-              <li>Custom design system — nothing off-the-shelf</li>
+              <li>Custom design system, nothing off-the-shelf</li>
               <li>Custom features, integrations &amp; automations</li>
               <li>Advanced animations &amp; interactions</li>
               <li>E-commerce, booking, payments &amp; more</li>
-              <li>Mobile, tablet &amp; desktop — pixel perfect</li>
+              <li>Mobile, tablet &amp; desktop, pixel perfect</li>
               <li>SEO foundations built in from day one</li>
               <li>Ongoing support &amp; maintenance available</li>
               <li>Clear, fixed quote before we start</li>
             </ul>
-            <a href="#contact" class="btn btn-primary btn-block">REQUEST A QUOTE →</a>
+            <a href="#contact" class="btn btn-solid btn-block">REQUEST A QUOTE →</a>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- MAIN CTA -->
-    <section class="section cta-section">
-      <div class="container cta-inner reveal">
-        <h2 class="cta-title">READY TO TAKE YOUR<br/>BUSINESS ONLINE?</h2>
-        <p class="cta-sub">Tell me about your business. I'll take care of the rest.</p>
-        <a href="#contact" class="btn btn-invert btn-lg">
-          <span>START YOUR PROJECT</span>
-          <span class="btn-arrow" aria-hidden="true">→</span>
-        </a>
-      </div>
-    </section>
-
     <!-- CONTACT -->
-    <section class="section section-alt" id="contact">
+    <section class="section" id="contact">
       <div class="container">
         <header class="section-head">
-          <span class="section-tag reveal">(06) CONTACT</span>
-          <h2 class="section-title reveal">LET'S BUILD SOMETHING</h2>
-          <p class="section-sub reveal">Fill out the form or message me directly. I usually reply within a few hours.</p>
+          <span class="section-tag reveal">(05) CONTACT</span>
+          <h2 class="section-title reveal">LET'S BUILD<br /><em>something</em></h2>
+          <p class="section-sub reveal">Fill out the form, I usually reply within a few hours.</p>
         </header>
 
         <div class="contact-grid">
@@ -427,14 +488,9 @@
                 <input type="email" id="email" name="email" required placeholder="you@business.com" autocomplete="email" />
               </div>
               <div class="field">
-                <label for="phone">PHONE</label>
-                <input type="tel" id="phone" name="phone" placeholder="+91 9176300158" autocomplete="tel" />
+                <label for="phone">PHONE <span class="optional">(optional)</span></label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX" autocomplete="tel" />
               </div>
-            </div>
-
-            <div class="field">
-              <label for="website">WEBSITE <span class="optional">(optional)</span></label>
-              <input type="url" id="website" name="website" placeholder="https://" autocomplete="url" />
             </div>
 
             <div class="field">
@@ -461,7 +517,7 @@
               <textarea id="message" name="message" rows="5" required placeholder="Tell me a bit about what you need, your timeline, and any examples you like."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <button type="submit" class="btn btn-solid btn-lg btn-block">
               <span id="submitText">SEND REQUEST</span>
               <span class="btn-arrow" aria-hidden="true">→</span>
             </button>
@@ -471,16 +527,16 @@
 
           <aside class="contact-side reveal">
             <div class="side-card">
-              <span class="side-label">YOUR NAME</span>
-              <span class="side-value">Belsso</span>
+              <span class="side-label">STUDIO</span>
+              <span class="side-value">SiteForge, Web design</span>
             </div>
             <div class="side-card">
               <span class="side-label">EMAIL</span>
-              <a class="side-value" href="mailto:belssobelsso81@gmail.com" data-contact="email">belssobelsso81@gmail.com</a>
+              <span class="side-value" data-contact="email">email@example.com</span>
             </div>
             <div class="side-card">
-              <span class="side-label">WHATSAPP / PHONE</span>
-              <a class="side-value" href="https://wa.me/919176300158" data-contact="whatsapp" target="_blank" rel="noopener">+91 9176300158</a>
+              <span class="side-label">PHONE / WHATSAPP</span>
+              <span class="side-value" data-contact="whatsapp">+91 XXXXX XXXXX</span>
             </div>
             <div class="side-card">
               <span class="side-label">LOCATION</span>
@@ -492,15 +548,7 @@
                 <span class="avail-dot"></span> Currently accepting new projects
               </span>
             </div>
-
-            <div class="quick-contact">
-              <span class="side-label">QUICK CONTACT</span>
-              <div class="quick-buttons">
-                <a href="https://wa.me/919176300158" target="_blank" rel="noopener" class="btn btn-ghost btn-block">MESSAGE ON WHATSAPP</a>
-                <a href="mailto:belssobelsso81@gmail.com" class="btn btn-ghost btn-block">SEND AN EMAIL</a>
-              </div>
-              <p class="quick-note">Prefer a call? Tap WhatsApp to message <strong>+91 9176300158</strong>.</p>
-            </div>
+            <p class="side-note">Prefer socials or a direct line? Professional contact details are being upgraded, the form reaches me instantly in the meantime.</p>
           </aside>
         </div>
       </div>
@@ -510,33 +558,36 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-    <div class="container footer-inner">
+    <div class="container footer-top">
       <div class="footer-brand">
         <span class="logo-mark">◼</span>
         <span class="logo-text">SITEFORGE</span>
-        <p>Premium websites for modern businesses. Designed and built with care by Belsso.</p>
       </div>
-
       <div class="footer-cols">
         <div>
           <span class="footer-label">SITEMAP</span>
           <a href="#home">Home</a>
+          <a href="#work">Concepts</a>
           <a href="#services">Services</a>
-          <a href="#work">Work</a>
           <a href="#process">Process</a>
           <a href="#pricing">Pricing</a>
           <a href="#contact">Contact</a>
         </div>
         <div>
           <span class="footer-label">CONTACT</span>
-          <a href="mailto:belssobelsso81@gmail.com">belssobelsso81@gmail.com</a>
-          <a href="https://wa.me/919176300158" target="_blank" rel="noopener">WhatsApp · +91 9176300158</a>
+          <a href="#contact">Contact form</a>
+          <span>email@example.com</span>
+          <span>+91 XXXXX XXXXX</span>
         </div>
         <div>
           <span class="footer-label">SOCIAL</span>
           <a href="#" target="_blank" rel="noopener">Instagram</a>
           <a href="#" target="_blank" rel="noopener">X / Twitter</a>
           <a href="#" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="footer-about">
+          <span class="footer-label">ABOUT US</span>
+          <p>SiteForge is a web design studio building premium, modern websites for businesses worldwide.</p>
         </div>
       </div>
     </div>
@@ -545,6 +596,19 @@
       <span>Crafted in black &amp; white.</span>
     </div>
   </footer>
+
+  <!-- Project detail overlay -->
+  <div class="project-overlay" id="projectOverlay" role="dialog" aria-modal="true" aria-labelledby="ovTitle" hidden>
+    <div class="overlay-backdrop" data-close-overlay></div>
+    <div class="overlay-panel">
+      <button type="button" class="overlay-close" data-close-overlay aria-label="Close project details">✕</button>
+      <span class="overlay-num" id="ovNum">01</span>
+      <h3 class="overlay-title" id="ovTitle">Project</h3>
+      <p class="overlay-type" id="ovType">Type</p>
+      <p class="overlay-text" id="ovText">Details</p>
+      <a href="#contact" class="btn btn-solid" data-close-overlay><span>START A PROJECT LIKE THIS</span><span class="btn-arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
