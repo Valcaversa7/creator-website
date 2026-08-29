@@ -1043,3 +1043,21 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
   .hero-lines { animation: none; }
   .line-pulse, .line-pulse-glow { animation: none; opacity: 0; }
 }
+
+/* ---------- Proximity glow on hero letters ---------- */
+.hero-title { user-select: none; -webkit-user-select: none; }
+/* Breathing room inside the reveal's overflow:hidden so glow isn't
+   clipped; padding/negative-margin cancel out — layout untouched. */
+.hero-title .line { padding: 0.3em 0.2em; margin: -0.3em -0.2em; }
+.ht-char { position: relative; display: inline-block; }
+.ht-char::after {
+  content: attr(data-c);
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+  color: #fff;
+  text-shadow: 0 0 14px rgba(255, 255, 255, 0.5), 0 0 38px rgba(255, 255, 255, 0.22);
+  opacity: var(--glow, 0);
+  will-change: opacity;
+}
