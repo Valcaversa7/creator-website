@@ -1049,7 +1049,24 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
 /* Breathing room inside the reveal's overflow:hidden so glow isn't
    clipped; padding/negative-margin cancel out — layout untouched. */
 .hero-title .line { padding: 0.3em 0.2em; margin: -0.3em -0.2em; }
-.ht-char { position: relative; display: inline-block; }
+.ht-char { position: relative; display: inline-block; isolation: isolate; }
+/* Emission layer BEHIND the letter: soft white-gold light radiating
+   from the glyph — this is what makes it read as glowing. */
+.ht-char::before {
+  content: attr(data-c);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  pointer-events: none;
+  color: #fff;
+  text-shadow:
+    0 0 10px rgba(255, 216, 140, 0.95),
+    0 0 22px rgba(255, 226, 168, 0.6),
+    0 0 46px rgba(255, 238, 208, 0.32);
+  opacity: var(--glow, 0);
+  will-change: opacity;
+}
 .ht-char::after {
   content: attr(data-c);
   position: absolute;
