@@ -1062,3 +1062,80 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
   opacity: var(--glow, 0);
   will-change: opacity;
 }
+
+/* ---------- Cursor lens: hidden website layer under the hero ---------- */
+/* Sits above the travelling background lines (z 0) and below all hero
+   content (z 2+). Normally invisible; the cursor drives a soft radial
+   mask that reveals it, like a flashlight over a hidden collage. */
+.hero-secret {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.55s var(--ease);
+  -webkit-mask-image: radial-gradient(270px circle at var(--rx, -999px) var(--ry, -999px),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.92) 30%,
+    rgba(255, 255, 255, 0.55) 52%,
+    rgba(255, 255, 255, 0.16) 72%,
+    transparent 88%);
+  mask-image: radial-gradient(270px circle at var(--rx, -999px) var(--ry, -999px),
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 255, 255, 0.92) 30%,
+    rgba(255, 255, 255, 0.55) 52%,
+    rgba(255, 255, 255, 0.16) 72%,
+    transparent 88%);
+}
+.hero-secret.is-on { opacity: 1; }
+.hero-secret * { pointer-events: none; }
+@media (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .hero-secret { display: none; }
+}
+
+/* Mockup pieces: quiet, premium, monochrome */
+.mock {
+  position: absolute;
+  background: rgba(19, 19, 22, 0.94);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+}
+.mock img {
+  width: 100%;
+  height: 116px;
+  object-fit: cover;
+  border-radius: 6px;
+  filter: grayscale(1);
+  opacity: 0.92;
+  display: block;
+}
+.mock-bar { display: flex; align-items: center; gap: 5px; margin-bottom: 9px; }
+.mock-bar i { width: 7px; height: 7px; border-radius: 50%; background: var(--line-strong); }
+.mock-url { flex: 1; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.09); margin-left: 7px; }
+.mock-lines span { display: block; height: 7px; border-radius: 99px; background: rgba(255, 255, 255, 0.14); margin-top: 8px; }
+
+.mock-nav { display: flex; align-items: center; gap: 11px; padding: 11px 16px; border-radius: 99px; }
+.mock-nav .dot { width: 10px; height: 10px; border-radius: 3px; background: rgba(255, 255, 255, 0.85); }
+.mock-nav .lk { width: 34px; height: 6px; border-radius: 99px; background: rgba(255, 255, 255, 0.2); }
+.mock-nav .btn { width: 60px; height: 19px; border-radius: 99px; background: rgba(255, 255, 255, 0.9); margin-left: 6px; }
+
+.mock-hero .h1 { display: block; height: 17px; border-radius: 4px; background: rgba(255, 255, 255, 0.82); margin-top: 10px; }
+.mock-hero .p { display: block; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.16); margin-top: 9px; }
+.mock-hero .row { display: flex; gap: 10px; margin-top: 14px; }
+.mock-hero .b1 { width: 92px; height: 26px; border-radius: 99px; background: rgba(255, 255, 255, 0.9); }
+.mock-hero .b2 { width: 92px; height: 26px; border-radius: 99px; border: 1px solid var(--line-strong); }
+
+.mock-price .tag { display: block; width: 64px; height: 9px; border-radius: 99px; border: 1px solid var(--line-strong); margin-bottom: 12px; }
+.mock-price .price { display: block; height: 22px; width: 96px; border-radius: 4px; background: rgba(255, 255, 255, 0.8); margin-bottom: 12px; }
+.mock-price .fl { display: block; height: 7px; border-radius: 99px; background: rgba(255, 255, 255, 0.14); margin-top: 9px; }
+.mock-price .cta { display: block; height: 24px; border-radius: 99px; background: rgba(255, 255, 255, 0.9); margin-top: 14px; }
+
+.mock-form .lbl { display: block; height: 6px; width: 42%; border-radius: 99px; background: rgba(255, 255, 255, 0.22); margin-top: 10px; }
+.mock-form .inp { display: block; height: 14px; border-bottom: 1px solid var(--line-strong); margin-top: 7px; margin-bottom: 4px; }
+.mock-form .send { display: block; width: 108px; height: 26px; border-radius: 99px; background: rgba(255, 255, 255, 0.9); margin-top: 14px; }
+
+.mock-btns { display: flex; gap: 10px; padding: 12px 14px; border-radius: 99px; }
+.mock-btns .b1 { width: 74px; height: 22px; border-radius: 99px; background: rgba(255, 255, 255, 0.9); }
+.mock-btns .b2 { width: 74px; height: 22px; border-radius: 99px; border: 1px solid var(--line-strong); }

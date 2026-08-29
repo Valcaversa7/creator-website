@@ -230,6 +230,65 @@
     }
   }
 
+  /* ---------- Cursor lens: reveal hidden website layer ---------- */
+  const heroSecret = $('#heroSecret');
+  const heroSection = $('.hero');
+  if (heroSecret && heroSection && !isCoarse && !reduceMotion) {
+    let hr = heroSection.getBoundingClientRect();
+    let rectsDirty = false;
+    let heroVisible = true;
+    let inside = false;
+    let seen = false;
+    let mx = 0, my = 0, lx = 0, ly = 0;
+    let raf = null;
+
+    const measure = () => { hr = heroSection.getBoundingClientRect(); rectsDirty = false; };
+    const wake = () => { if (raf === null && heroVisible) raf = requestAnimationFrame(tick); };
+
+    const tick = () => {
+      raf = null;
+      if (!heroVisible || !seen) return;
+      if (rectsDirty) measure();
+      // lens trails the cursor: soft inertia, never snaps
+      lx += (mx - lx) * 0.14;
+      ly += (my - ly) * 0.14;
+      heroSecret.style.setProperty('--rx', (lx - hr.left).toFixed(1) + 'px');
+      heroSecret.style.setProperty('--ry', (ly - hr.top).toFixed(1) + 'px');
+      // settle exactly at rest, then stop the loop (zero idle cost)
+      if (Math.abs(mx - lx) < 0.3 && Math.abs(my - ly) < 0.3) {
+        lx = mx; ly = my;
+        return;
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    heroSection.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      if (!seen) { lx = mx; ly = my; seen = true; }
+      if (!inside) {
+        inside = true;
+        heroSecret.classList.add('is-on');
+      }
+      wake();
+    });
+    heroSection.addEventListener('mouseleave', () => {
+      inside = false;
+      heroSecret.classList.remove('is-on');
+      heroSecret.style.setProperty('--rx', '-999px');
+      heroSecret.style.setProperty('--ry', '-999px');
+    });
+
+    window.addEventListener('scroll', () => { rectsDirty = true; }, { passive: true });
+    window.addEventListener('resize', () => { rectsDirty = true; wake(); }, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        heroVisible = entries[0].isIntersecting;
+        if (heroVisible && seen && inside) wake();
+      }, { threshold: 0 }).observe(heroSection);
+    }
+  }
+
   /* ---------- Project overlay ---------- */
   const PROJECTS = {
     nova: {
