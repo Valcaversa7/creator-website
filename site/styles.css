@@ -1043,3 +1043,24 @@ body.loaded .hero-title .line-inner { transform: translateY(0); }
   .hero-lines { animation: none; }
   .line-pulse, .line-pulse-glow { animation: none; opacity: 0; }
 }
+
+/* ---------- Video band ---------- */
+.video-band { padding-top: clamp(60px, 8vw, 110px); }
+.video-head { text-align: center; }
+.video-head .section-sub { margin-left: auto; margin-right: auto; }
+.video-frame {
+  max-width: 980px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  outline: 1px solid var(--line);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+  background: var(--panel);
+}
+.video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
